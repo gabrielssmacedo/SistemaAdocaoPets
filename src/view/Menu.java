@@ -93,5 +93,122 @@ public class Menu {
 		return perguntas;
 	}
 	
+	public Map<Integer, String> validaRespostas(List<String> perguntas, Scanner sc) throws RuntimeException {
+		
+		Map<Integer, String> respostas = new LinkedHashMap<>();
+		String resposta;
+		Integer indice;
+		
+		for(indice = 0; indice < perguntas.size(); indice++) {
+			System.out.println(perguntas.get(indice));
+			
+			switch (indice) {
+			case 0:
+				System.out.print("> ");
+				resposta = sc.nextLine();
+				
+				if(resposta == null) throw new RuntimeException("Valor invalido! Você deve inserir um nome.");
+				
+				else if(temCaracteresEspeciais(resposta)) throw new RuntimeException("Valor invalido! O nome deve conter SOMENTE letras.");
+				
+				respostas.put(indice + 1, resposta);
+				break;
+				
+			case 3:
+				StringBuilder endereco = new StringBuilder();
+				
+				System.out.print(">> Cidade: ");
+				resposta = sc.nextLine();
+				endereco.append(resposta).append(",");
+				
+				System.out.print(">> Rua: ");
+				resposta = sc.nextLine();
+				endereco.append(resposta).append(",");
+				
+				System.out.print(">> Numero da casa: ");
+				resposta = sc.next();
+				sc.nextLine();
+				
+				endereco.append(resposta.isEmpty()? "ND" : resposta);
+				respostas.put(indice + 1, endereco.toString());
+				break;
+				
+			case 4:
+				try {
+					char mesesOuAno;
+					do {
+						System.out.print("> Digitar em meses ou anos (m/a): ");
+					    mesesOuAno = sc.next().charAt(0);
+					} while(mesesOuAno != 'm' && mesesOuAno != 'a');
+					
+					System.out.print(">> ");
+					double idade = sc.nextDouble();
+					if(mesesOuAno == 'm') idade = idade / 12;
+					
+					if(idade > 20) throw new RuntimeException("Valor invalido! A idade deve ser ate 20 anos.");	
+					
+					respostas.put(indice + 1, String.format("%.1f", idade));
+					}
+				catch(InputMismatchException e) {
+					System.out.println("A idade deve conter somente numeros.");
+					sc.next();
+				}
+				break;
+				
+			case 5:
+				try {
+					System.out.print("> ");
+					double peso = sc.nextDouble();
+					
+					if(peso > 60 || peso < 0.50) throw new RuntimeException("Valor invalido! O peso deve estar entre 0.5Kg e 60Kg");	
+					
+					respostas.put(indice + 1, String.format("%.2f", peso));
+					}
+				catch(InputMismatchException e) {
+					System.out.println("Valor invalido! A idade deve conter somente numeros.");
+					sc.next();
+				}
+				break;
+				
+			case 6:
+				System.out.print("> ");
+				sc.nextLine();
+				String raca = sc.nextLine();
+				boolean especial = temCaracteresEspeciais(raca);
+				
+				while(especial) {
+					System.out.println("Raca deve conter somente letras.");
+					raca = sc.nextLine();
+					especial = temCaracteresEspeciais(raca);
+				}
+				respostas.put(indice + 1, raca);
+				break;
+				
+			default:
+				System.out.print("> ");
+				resposta = sc.next();
+				sc.nextLine();
+				respostas.put(indice + 1, resposta);
+			}
+		}
+		
+		System.out.println(respostas);
+		return respostas;
+	}
 	
+	private boolean temCaracteresEspeciais(String s) {
+		String[] nomes = s.split(" ");
+		
+		for(String n : nomes) {
+	    	int contador = 0;
+	    	
+	    	while(contador < n.length()) {
+	    		char caracter = n.charAt(contador);
+	    		if(!Character.isLetter(caracter)) return true;
+	    		contador++;
+	    	}
+		}
+		
+		return false;
+	}
 }

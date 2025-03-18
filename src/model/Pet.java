@@ -4,7 +4,10 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.List;
 
+import controller.ConsultaService;
+import controller.interfaces.Busca;
 import model.enums.SexoPet;
 import model.enums.TipoPet;
 
@@ -132,9 +135,11 @@ public class Pet {
 		return false;
 	}
 	
-	public boolean alterarCadastro() {
-		///
-		///
+	public boolean alterarCadastro(String diretorio, Busca tipoBusca) {
+		
+		
+		
+		
 		return false;
 	}
 	

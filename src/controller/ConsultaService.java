@@ -5,7 +5,10 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import controller.interfaces.Busca;
 import model.Endereco;
@@ -23,16 +26,22 @@ public class ConsultaService {
 	}
 	
 	public List<Pet> consultar() {
-		List<Pet> listaPets = listarTodosPets();
+		List<Pet> listaPets = new ArrayList<>();
+		Set<Pet> conjuntoPets = listarTodosPets().keySet();
+		
+		for(Pet pet : conjuntoPets) {
+			listaPets.add(pet);
+		}
 		
 		return tipoBusca.buscarPet(listaPets);
 	}
 	
-	public List<Pet> listarTodosPets(){
+	public Map<Pet, File> listarTodosPets(){
 		File diretorioCadastro = new File(diretorio);
 		File[] arqPetsCadastrados = diretorioCadastro.listFiles();
 		List<String> infoPets = new ArrayList<>();
 		List<Pet> listaPets = new ArrayList<>();
+		Map<Pet, File> petsCadastrados = new LinkedHashMap<>();
 		
 		for(File caminho : arqPetsCadastrados) {
 			try(BufferedReader br = new BufferedReader(new FileReader(caminho))){
@@ -44,6 +53,8 @@ public class ConsultaService {
 				}
 				
 				Pet pet = converterPet(infoPets);
+				
+				petsCadastrados.put(pet, caminho);
 				listaPets.add(pet);
 			}
 			catch(IOException e) {
@@ -52,8 +63,11 @@ public class ConsultaService {
 			}
 		}
 		
-		return listaPets;
+		
+		return petsCadastrados;
 	}
+	
+	
 	
 	private Pet converterPet(List<String> infoPets) {
 		String[] infoEndereco = infoPets.get(3).split(", ");

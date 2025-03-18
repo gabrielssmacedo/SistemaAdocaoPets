@@ -22,7 +22,7 @@ public class ConsultaService {
 		this.tipoBusca = tipoBusca;
 	}
 	
-	public List<Pet> consultarUmCriterio(String tipo, String criterio){
+	public List<Pet> consultar(String tipo, String criterio){
 		File diretorioCadastro = new File(diretorio);
 		File[] arqPetsCadastrados = diretorioCadastro.listFiles();
 		List<String> infoPets = new ArrayList<>();

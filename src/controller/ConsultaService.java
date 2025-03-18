@@ -22,7 +22,13 @@ public class ConsultaService {
 		this.tipoBusca = tipoBusca;
 	}
 	
-	public List<Pet> consultar(String tipo, String criterio){
+	public List<Pet> consultar() {
+		List<Pet> listaPets = listarTodosPets();
+		
+		return tipoBusca.buscarPet(listaPets);
+	}
+	
+	public List<Pet> listarTodosPets(){
 		File diretorioCadastro = new File(diretorio);
 		File[] arqPetsCadastrados = diretorioCadastro.listFiles();
 		List<String> infoPets = new ArrayList<>();
@@ -42,10 +48,11 @@ public class ConsultaService {
 			}
 			catch(IOException e) {
 				System.out.println("Erro na leitura do arquivo.");
+				return null;
 			}
 		}
 		
-		return tipoBusca.buscarPet(listaPets);
+		return listaPets;
 	}
 	
 	private Pet converterPet(List<String> infoPets) {

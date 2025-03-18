@@ -62,11 +62,14 @@ public class Menu {
 				System.out.println("[6] Endereco");
 				System.out.println("[7] Nome e Idade");
 				System.out.println("[8] Idade e Peso");
+				System.out.println("[9] Nome e Peso");
+				System.out.println("[10] Raca e Peso");
+				System.out.println("[11] Sexo e Raca");
 
 				System.out.println("> ");
 				resposta = sc.nextInt();
 				
-			} while (resposta < 1 || resposta > 8);
+			} while (resposta < 1 || resposta > 11);
 		} catch (InputMismatchException e) {
 			System.out.println("Digite apenas numeros.");
 		} finally {

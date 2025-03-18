@@ -5,5 +5,5 @@ import java.util.List;
 import model.Pet;
 
 public interface Busca {
-	List<Pet> buscarPet(String diretorio);
+	List<Pet> buscarPet(List<Pet> listaPets);
 }

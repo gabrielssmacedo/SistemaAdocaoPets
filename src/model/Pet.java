@@ -121,7 +121,7 @@ public class Pet {
 					+ String.valueOf(endereco.getNumero()) + ", "
 					+ endereco.getCidade()));
 			bw.write(String.format("5 - %.1f anos\n", idade));
-			bw.write(String.format("6 - %.1fKg\n", peso));
+			bw.write(String.format("6 - %.1fkg\n", peso));
 			bw.write(String.format("7 - %s\n", raca));
 			return true;
 		}
@@ -149,8 +149,8 @@ public class Pet {
 		return getNome() + " - " 
 			 + getTipo() + " - "
 			 + getSexo() + " - " 
-			 + getEndereco().getRua() + ",  "
-			 + getEndereco().getNumero() + " - "
+			 + getEndereco().getRua() + ", "
+			 + getEndereco().getNumero() + ", "
 			 + getEndereco().getCidade() + " - " 
 			 + getIdade() + " - "
 			 + getPeso() + " - " 

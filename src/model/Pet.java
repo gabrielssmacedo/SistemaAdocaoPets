@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
+
 import model.enums.SexoPet;
 import model.enums.TipoPet;
 
@@ -154,10 +155,18 @@ public class Pet {
 		return false;
 	}
 	
-	public boolean deletarCadastro() {
-		///
-		///
-		return false;
+	public boolean deletarCadastro(String caminhoArquivo) {
+		File arquivo = new File(caminhoArquivo);
+		try {
+			arquivo.delete();
+		}
+		catch(Exception e) {
+			System.out.println("Erro ao deletar o cadastro");
+			return false;
+		}
+		
+		System.out.println("Cadastro deletado com sucesso.");
+		return true;
 	}
 
 	@Override

@@ -6,5 +6,10 @@ public enum Criterio {
 	IDADE,
 	PESO,
 	RACA,
-	ENDERECO;
+	ENDERECO,
+	NOME_IDADE,
+	IDADE_PESO,
+	NOME_PESO, 
+	RACA_PESO,
+	SEXO_RACA;
 }

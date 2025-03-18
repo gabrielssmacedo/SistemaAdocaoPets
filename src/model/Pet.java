@@ -1,13 +1,10 @@
 package model;
 
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.List;
-
-import controller.ConsultaService;
-import controller.interfaces.Busca;
 import model.enums.SexoPet;
 import model.enums.TipoPet;
 
@@ -135,10 +132,24 @@ public class Pet {
 		return false;
 	}
 	
-	public boolean alterarCadastro(String diretorio, Busca tipoBusca) {
+	public boolean alterarCadastro(Pet pet, File caminhoArquivo) {
 		
-		
-		
+		try(BufferedWriter bw = new BufferedWriter(new FileWriter(caminhoArquivo))){
+			bw.write(String.format("1 - %s\n", pet.getNome()));
+			bw.write(String.format("2 - %s\n", pet.getTipo()));
+			bw.write(String.format("3 - %s\n", pet.getSexo()));
+			bw.write(String.format("4 - %s\n", 
+					  pet.getEndereco().getRua() + ", "
+					+ String.valueOf(pet.getEndereco().getNumero()) + ", "
+					+ pet.getEndereco().getCidade()));
+			bw.write(String.format("5 - %.1f anos\n", pet.getIdade()));
+			bw.write(String.format("6 - %.1fkg\n", pet.getPeso()));
+			bw.write(String.format("7 - %s\n", pet.getRaca()));
+			return true;
+		}
+		catch(IOException e) {
+			System.out.println("Erro na alteracao do cadastro.");
+		}
 		
 		return false;
 	}

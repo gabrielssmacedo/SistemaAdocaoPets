@@ -12,7 +12,10 @@ import java.util.Scanner;
 
 public class Menu {
 	private String caminhoFormulario;
-
+	
+	public Menu() {
+	}
+	
 	public Menu(String caminhoFormulario) {
 		this.caminhoFormulario = caminhoFormulario;
 	}
@@ -24,20 +27,20 @@ public class Menu {
 		try {
 			do {
 				System.out.println("Deseja:");
-				System.out.println("[1] Cadastrar um novo pet");
-				System.out.println("[2] Alterar os dados do pet cadastrado");
-				System.out.println("[3] Deletar um pet cadastrado");
-				System.out.println("[4] Listar todos os pets cadastrados");
-				System.out.println("[5] Listar pets por algum critério (idade, nome, raça)");
-				System.out.println("[6] Sair");
+				System.out.println(" [1] Cadastrar um novo pet");
+				System.out.println(" [2] Alterar os dados do pet cadastrado");
+				System.out.println(" [3] Deletar um pet cadastrado");
+				System.out.println(" [4] Listar todos os pets cadastrados");
+				System.out.println(" [5] Listar pets por algum critério (idade, nome, raça)");
+				System.out.println(" [6] Sair");
 				
-				System.out.println("> ");
+				System.out.print("\n > ");
 				resposta = sb.nextInt();
 				
 			} while(resposta < 1 || resposta > 6);
 		} 
 		catch(InputMismatchException e){
-			System.out.println("Digite apenas numeros.");
+			System.out.println("\nERRO: Digite apenas numeros.");
 		}
 		finally {
 			sb.close();
@@ -197,6 +200,22 @@ public class Menu {
 		
 		System.out.println(respostas);
 		return respostas;
+	}
+	
+	public void inicio() {
+		String barra = "=";
+		String espaco = " ";
+		int numBarras = 132;
+		int numEspacos = 53;
+		for(int i = 0; i < numBarras; i++) System.out.print(barra);
+		System.out.print("\n|");
+		for(int i = 0; i < numEspacos; i++) System.out.print(espaco);
+		System.out.print("SISTEMA DE ADOÇÃO DE PETS");
+		for(int i = 0; i < numEspacos-1; i++) System.out.print(espaco);
+		System.out.print("|\n");
+		for(int i = 0; i < numBarras; i++) System.out.print(barra);
+		System.out.println("\n");
+		System.out.println("Bem vindo ao Sistema de cadastro para a Adoção de Pets!\n");
 	}
 	
 	private boolean temCaracteresEspeciais(String s) {

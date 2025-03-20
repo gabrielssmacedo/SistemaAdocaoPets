@@ -18,6 +18,7 @@ public class Pet {
 	private Double peso;
 	private String raca;
 	private LocalDateTime dataHora;
+	final static String respostaVazia = "Nao Informado";
 	
 	public Pet(String nome) {
 		if(nome == null) System.out.println(); //lançar exceção
@@ -117,13 +118,24 @@ public class Pet {
 			bw.write(String.format("1 - %s\n", nome));
 			bw.write(String.format("2 - %s\n", tipo));
 			bw.write(String.format("3 - %s\n", sexo));
-			bw.write(String.format("4 - %s\n", 
-					  endereco.getRua() + ", "
-					+ String.valueOf(endereco.getNumero()) + ", "
-					+ endereco.getCidade()));
-			bw.write(String.format("5 - %.1f anos\n", idade));
-			bw.write(String.format("6 - %.1fkg\n", peso));
-			bw.write(String.format("7 - %s\n", raca));
+			if(endereco.getNumero() == null) {
+				bw.write(String.format("4 - %s\n", 
+						  endereco.getRua() + ", "
+						+ respostaVazia + ", "
+						+ endereco.getCidade()));
+			}
+			else {
+				bw.write(String.format("4 - %s\n", 
+						  endereco.getRua() + ", "
+						+ String.valueOf(endereco.getNumero()) + ", "
+						+ endereco.getCidade()));
+			}
+			if(idade == null) bw.write(String.format("5 - %s\n", respostaVazia));
+			else bw.write(String.format("5 - %.1f anos\n", idade));
+			if(peso == null) bw.write(String.format("6 - %s\n", respostaVazia));
+			else bw.write(String.format("6 - %.1fkg\n", peso));
+			if(raca == null) bw.write(String.format("7 - %s\n", respostaVazia));
+			else bw.write(String.format("7 - %s\n", raca));
 			return true;
 		}
 		catch(IOException e) {

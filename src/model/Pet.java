@@ -145,19 +145,19 @@ public class Pet {
 		return false;
 	}
 	
-	public boolean alterarCadastro(Pet pet, File caminhoArquivo) {
+	public boolean alterarCadastro(String caminhoArquivo) {
 		
 		try(BufferedWriter bw = new BufferedWriter(new FileWriter(caminhoArquivo))){
-			bw.write(String.format("1 - %s\n", pet.getNome()));
-			bw.write(String.format("2 - %s\n", pet.getTipo()));
-			bw.write(String.format("3 - %s\n", pet.getSexo()));
+			bw.write(String.format("1 - %s\n", nome));
+			bw.write(String.format("2 - %s\n", tipo));
+			bw.write(String.format("3 - %s\n", sexo));
 			bw.write(String.format("4 - %s\n", 
-					  pet.getEndereco().getRua() + ", "
-					+ String.valueOf(pet.getEndereco().getNumero()) + ", "
-					+ pet.getEndereco().getCidade()));
-			bw.write(String.format("5 - %.1f anos\n", pet.getIdade()));
-			bw.write(String.format("6 - %.1fkg\n", pet.getPeso()));
-			bw.write(String.format("7 - %s\n", pet.getRaca()));
+					  endereco.getRua() + ", "
+					+ String.valueOf(endereco.getNumero()) + ", "
+					+ endereco.getCidade()));
+			bw.write(String.format("5 - %.1f anos\n", idade));
+			bw.write(String.format("6 - %.1fkg\n", peso));
+			bw.write(String.format("7 - %s\n", raca));
 			return true;
 		}
 		catch(IOException e) {

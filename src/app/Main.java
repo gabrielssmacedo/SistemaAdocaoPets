@@ -158,16 +158,71 @@ public class Main {
 			if(pet.cadastrar(caminhoDirCadastro)) System.out.println("\nPet cadastrado com sucesso.");
 			break;
 		case 2:
+			Menu.menuBuscaPets();
+			int respostaBusca;
+			List<Pet> petsEncontrados;
+			do {
+				System.out.print("\n > ");
+				respostaBusca = sc.nextInt();
+			} while(respostaBusca < 1 || respostaBusca > 11);
+			
+			sc.nextLine();
+			
+			petsEncontrados = consultarPet(respostaBusca, sc, caminhoDirCadastro);
 			
 			
+			if(!petsEncontrados.isEmpty()) { 
+				System.out.println("Deseja alterar cadastro de:");
+				for(int i = 0; i < petsEncontrados.size(); i++) {
+					System.out.println("[" + (i+1) + "] " + petsEncontrados.get(i));
+				}
+				System.out.print(" > ");
+				int respostaEscolhaCadastro = sc.nextInt();
+				
+				sc.nextLine();
+				
+				System.out.println("Nome: ");
+				nome = sc.nextLine();
+				
+				System.out.println("Cidade: ");
+				String cidade = sc.nextLine();
+				
+				System.out.println("Rua: ");
+				String rua = sc.nextLine();
+				
+				System.out.println("Numero: ");
+				int numero = sc.nextInt();
+				
+				System.out.println("Idade: ");
+				idade = sc.nextDouble();
+				
+				System.out.println("Peso: ");
+				peso = sc.nextDouble();
+				
+				System.out.println("Raca: ");
+				sc.nextLine();
+				raca = sc.nextLine();
+				
+				Pet novoPet = petsEncontrados.get(respostaEscolhaCadastro);
+				novoPet.setNome(nome);
+				novoPet.setEndereco(new Endereco(numero, cidade, rua));
+				novoPet.setIdade(idade);
+				novoPet.setPeso(peso);
+				novoPet.setRaca(raca);
+				
+				novoPet.alterarCadastro(caminhoDirCadastro);
+				
+			}
+			else System.out.println("Nenhum pet encontrado.");
+			
+			break;
 		case 3:
 			//deletar cadastro
 		case 4:
 			//listaTodosPets
 		case 5:
 			Menu.menuBuscaPets();
-			int respostaBusca;
-			List<Pet> petsEncontrados;
+			
 			do {
 				System.out.print("\n > ");
 				respostaBusca = sc.nextInt();

@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 import model.enums.SexoPet;
 import model.enums.TipoPet;
@@ -173,12 +174,29 @@ public class Pet {
 			arquivo.delete();
 		}
 		catch(Exception e) {
-			System.out.println("Erro ao deletar o cadastro");
+			System.out.println("Erro ao deletar o Pet");
 			return false;
 		}
 		
-		System.out.println("Cadastro deletado com sucesso.");
+		System.out.println("Pet deletado com sucesso.");
 		return true;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(nome, sexo, tipo);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Pet other = (Pet) obj;
+		return Objects.equals(nome, other.nome) && sexo == other.sexo && tipo == other.tipo;
 	}
 
 	@Override

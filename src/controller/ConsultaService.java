@@ -72,7 +72,6 @@ public class ConsultaService {
 	}
 	
 	
-	
 	private Pet converterPet(List<String> infoPets) {
 		Endereco endereco;
 		String[] infoEndereco = infoPets.get(3).split(", ");

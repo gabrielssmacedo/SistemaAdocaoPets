@@ -123,12 +123,12 @@ public class Main {
 						
 						break;
 					case 5:
-						System.out.print(" > ");
+						System.out.print(" >> ");
 						respostaFormulario = sc.nextLine();
 						
 						if(!respostaFormulario.isBlank()) {
 							while(!Menu.validaRespostas(respostaFormulario, indice)) {
-								System.out.print(" > ");
+								System.out.print(" >> ");
 								respostaFormulario = sc.nextLine();
 							}
 						}
@@ -138,12 +138,12 @@ public class Main {
 						
 						break;
 					case 6:
-						System.out.print(" > ");
+						System.out.print(" >> ");
 						raca = sc.nextLine();
 						
 						if(!raca.isEmpty()) {
 							while(!Menu.validaRespostas(raca, indice)) {
-								System.out.print(" > ");
+								System.out.print(" >> ");
 								raca = sc.nextLine();
 							}
 						}
@@ -166,7 +166,7 @@ public class Main {
 			int respostaBusca;
 			List<Pet> petsEncontrados;
 			do {
-				System.out.print("\n > ");
+				System.out.print("\n >> ");
 				respostaBusca = sc.nextInt();
 			} while(respostaBusca < 1 || respostaBusca > 11);
 			
@@ -180,7 +180,7 @@ public class Main {
 				for(int i = 0; i < petsEncontrados.size(); i++) {
 					System.out.println("[" + (i+1) + "] " + petsEncontrados.get(i));
 				}
-				System.out.print(" > ");
+				System.out.print(" >> ");
 				int respostaEscolhaCadastro = sc.nextInt();
 				
 				sc.nextLine();
@@ -207,7 +207,7 @@ public class Main {
 				sc.nextLine();
 				raca = sc.nextLine();
 				
-				Pet novoPet = petsEncontrados.get(respostaEscolhaCadastro);
+				Pet novoPet = petsEncontrados.get(respostaEscolhaCadastro-1);
 				novoPet.setNome(nome);
 				novoPet.setEndereco(new Endereco(numero, cidade, rua));
 				novoPet.setIdade(idade);
@@ -224,7 +224,7 @@ public class Main {
 			int respostaDelecao;
 			String respostaConfirmacao;
 			Menu.menuBuscaPets();
-			
+			ConsultaService buscarTodosPets = new ConsultaService(caminhoDirCadastro);
 			do {
 				System.out.print("\n > ");
 				respostaBusca = sc.nextInt();
@@ -246,11 +246,19 @@ public class Main {
 			
 			System.out.print("Tem certeza que deseja deletar esse pet (sim/nao)?  ");
 			respostaConfirmacao = sc.next();
+
 			
-			
-			if(respostaConfirmacao.toUpperCase() == "SIM") 
-				if(petsEncontradosCase3.get(respostaDelecao).deletarCadastro(caminhoDirCadastro))
-					System.out.println("Pet deletado com sucesso.");
+			if(respostaConfirmacao.toUpperCase().equalsIgnoreCase("SIM")) {
+				Map<Pet, File> todosPetsMap = buscarTodosPets.listarTodosPets();
+				Set<Pet> todosPetsSet = todosPetsMap.keySet();
+				
+				for(Pet petCadastrado : todosPetsSet) {
+					if(petsEncontradosCase3.get(respostaDelecao-1).equals(petCadastrado)) {
+						File arqPet = todosPetsMap.get(petCadastrado);
+						petCadastrado.deletarCadastro(String.valueOf(arqPet));
+					}
+				}	
+			}
 			
 			break;
 		case 4:

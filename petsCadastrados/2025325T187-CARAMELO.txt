@@ -1,7 +1,0 @@
-1 - Caramelo
-2 - CACHORRO
-3 - MACHO
-4 - Avenida Paulista, Nao Informado, Sao Paulo
-5 - 5,0 anos
-6 - 46,0kg
-7 - salsicha

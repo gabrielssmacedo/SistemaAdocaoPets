@@ -158,6 +158,13 @@ public class Main {
 			if(pet.cadastrar(caminhoDirCadastro)) System.out.println("\nPet cadastrado com sucesso.");
 			break;
 		case 2:
+			//alterar cadastro
+			
+		case 3:
+			//deletar cadastro
+		case 4:
+			//listaTodosPets
+		case 5:
 			Menu.menuBuscaPets();
 			int respostaBusca;
 			
@@ -235,13 +242,6 @@ public class Main {
 				consultarPet(sexoPet, racaPet, Criterio.SEXO_RACA, caminhoDirCadastro);
 				break;
 			}
-			
-		case 3:
-			
-		case 4:
-			
-		case 5:
-			
 		default:
 			break;
 		}

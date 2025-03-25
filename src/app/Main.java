@@ -217,7 +217,38 @@ public class Main {
 			
 			break;
 		case 3:
-			//deletar cadastro
+			int respostaDelecao;
+			String respostaConfirmacao;
+			Menu.menuBuscaPets();
+			
+			do {
+				System.out.print("\n > ");
+				respostaBusca = sc.nextInt();
+			} while(respostaBusca < 1 || respostaBusca > 11);
+			
+			sc.nextLine();
+			
+			List<Pet> petsEncontradosCase3 = consultarPet(respostaBusca, sc, caminhoDirCadastro);
+			
+			if(!petsEncontradosCase3.isEmpty()) { 
+				System.out.printf("%d pet(s) encontrado(s):\n", petsEncontradosCase3.size());
+				for(int i = 0; i < petsEncontradosCase3.size(); i++) {
+					System.out.println("[" + (i+1) + "] " + petsEncontradosCase3.get(i));
+				}
+			}
+			
+			System.out.print("\nDeseja deletar qual cadastro: ");
+			respostaDelecao = sc.nextInt();
+			
+			System.out.print("Tem certeza que deseja deletar esse pet (sim/nao)?  ");
+			respostaConfirmacao = sc.next();
+			
+			
+			if(respostaConfirmacao.toUpperCase() == "SIM") 
+				if(petsEncontradosCase3.get(respostaDelecao).deletarCadastro(caminhoDirCadastro))
+					System.out.println("Pet deletado com sucesso.");
+			
+			break;
 		case 4:
 			//listaTodosPets
 		case 5:
@@ -230,13 +261,13 @@ public class Main {
 			
 			sc.nextLine();
 			
-			petsEncontrados = consultarPet(respostaBusca, sc, caminhoDirCadastro);
+			List<Pet> petsEncontradosCase5 = consultarPet(respostaBusca, sc, caminhoDirCadastro);
 			
 			
 			
-			if(!petsEncontrados.isEmpty()) { 
-				System.out.printf("%d pet(s) encontrado(s):\n", petsEncontrados.size());
-				petsEncontrados.forEach(System.out::println);
+			if(!petsEncontradosCase5.isEmpty()) { 
+				System.out.printf("%d pet(s) encontrado(s):\n", petsEncontradosCase5.size());
+				petsEncontradosCase5.forEach(System.out::println);
 			}
 			else System.out.println("Nenhum pet encontrado.");
 			

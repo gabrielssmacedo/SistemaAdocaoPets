@@ -162,65 +162,78 @@ public class Main {
 			int respostaBusca;
 			
 			do {
-				System.out.print(" > ");
+				System.out.print("\n > ");
 				respostaBusca = sc.nextInt();
-			} while(respostaBusca < 1 && respostaBusca > 11);
+			} while(respostaBusca < 1 || respostaBusca > 11);
+			
+			sc.nextLine();
 			
 			switch(respostaBusca) {
 			case 1:
 				System.out.println("Nome: ");
 				String nomePet = sc.nextLine();
 				consultarPet(nomePet, Criterio.NOME, caminhoDirCadastro);
+				break;
 			case 2:
 				System.out.println("Sexo: ");
 				String sexoPet = sc.nextLine();
 				consultarPet(sexoPet, Criterio.SEXO, caminhoDirCadastro);
+				break;
 			case 3:
 				System.out.println("Idade: ");
 				String idadePet = sc.nextLine();
 				consultarPet(idadePet, Criterio.IDADE, caminhoDirCadastro);
+				break;
 			case 4:
 				System.out.println("Peso: ");
 				String pesoPet = sc.nextLine();
 				consultarPet(pesoPet, Criterio.PESO, caminhoDirCadastro);
+				break;
 			case 5:
 				System.out.println("Raca: ");
 				String racaPet = sc.nextLine();
 				consultarPet(racaPet, Criterio.RACA, caminhoDirCadastro);
+				break;
 			case 6:
 				System.out.println("Endereco: ");
 				String enderecoPet = sc.nextLine();
 				consultarPet(enderecoPet, Criterio.ENDERECO, caminhoDirCadastro);
+				break;
 			case 7:
 				System.out.println("Nome: ");
 				nomePet = sc.nextLine();
 				System.out.println("Idade: ");
 				idadePet = sc.nextLine();
 				consultarPet(nomePet, idadePet, Criterio.NOME_IDADE, caminhoDirCadastro);
+				break;
 			case 8:
 				System.out.println("Idade: ");
 				idadePet = sc.nextLine();
 				System.out.println("Peso: ");
 				pesoPet = sc.nextLine();
 				consultarPet(idadePet, pesoPet, Criterio.IDADE_PESO, caminhoDirCadastro);
+				break;
 			case 9:
 				System.out.println("Nome: ");
 				nomePet = sc.nextLine();
 				System.out.println("Peso: ");
 				pesoPet = sc.nextLine();
 				consultarPet(nomePet, pesoPet, Criterio.NOME_PESO, caminhoDirCadastro);
+				break;
 			case 10:
 				System.out.println("Raca: ");
 				racaPet = sc.nextLine();
 				System.out.println("Peso: ");
 				pesoPet = sc.nextLine();
 				consultarPet(racaPet, pesoPet, Criterio.RACA_PESO, caminhoDirCadastro);
+				break;
 			case 11:	
 				System.out.println("Sexo: ");
 				sexoPet= sc.nextLine();
 				System.out.println("Raca: ");
 				racaPet = sc.nextLine();
 				consultarPet(sexoPet, racaPet, Criterio.SEXO_RACA, caminhoDirCadastro);
+				break;
 			}
 			
 		case 3:
@@ -244,8 +257,8 @@ public class Main {
 		int count = 1;
 		if(!petsEncontrados.isEmpty()) {
 			for(Pet petEncontrado : petsEncontrados) {
-				System.out.printf("%d pet(s) encontrado(s):\n", petsEncontrados.size());
-				System.out.println(count + " -> " + petEncontrado);
+				System.out.printf("\n%d pet(s) encontrado(s):\n", petsEncontrados.size());
+				System.out.println(count + " . " + petEncontrado);
 				count++;						
 			}
 		}
@@ -258,8 +271,8 @@ public class Main {
 		int count = 1;
 		if(!petsEncontrados.isEmpty()) {
 			for(Pet petEncontrado : petsEncontrados) {
-				System.out.printf("%d pet(s) encontrado(s):\n", petsEncontrados.size());
-				System.out.println(count + " -> " + petEncontrado);
+				System.out.printf("\n%d pet(s) encontrado(s):\n", petsEncontrados.size());
+				System.out.println(count + " . " + petEncontrado);
 				count++;						
 			}
 		}

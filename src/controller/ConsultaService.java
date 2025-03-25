@@ -76,6 +76,9 @@ public class ConsultaService {
 		String[] idade = infoPets.get(4).split(" anos");
 		String[] peso = infoPets.get(5).split("kg");
 		
+		idade[0] = idade[0].replace(',', '.');
+		peso[0] = peso[0].replace(',', '.');
+		
 		Pet pet = new Pet(
 				infoPets.get(0)
 				, TipoPet.valueOf(infoPets.get(1).toUpperCase())

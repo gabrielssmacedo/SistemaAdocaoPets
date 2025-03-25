@@ -4,11 +4,8 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.InputMismatchException;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
+
 
 public final class Menu {
 
@@ -35,8 +32,6 @@ public final class Menu {
 		System.out.println("[9] Nome e Peso");
 		System.out.println("[10] Raca e Peso");
 		System.out.println("[11] Sexo e Raca");
-
-		System.out.println("> ");
 	}
 	
 	public static List<String> lerFormulario(String caminhoFormulario){

@@ -13,7 +13,13 @@ public class BuscarDoisCriterios implements Busca{
 	private String informacaoPet1;
 	private String informacaoPet2;
 	private Criterio criterio;
-
+	
+	public BuscarDoisCriterios(String informacaoPet1, String informacaoPet2, Criterio criterio) {
+		this.informacaoPet1 = informacaoPet1;
+		this.informacaoPet2 = informacaoPet2;
+		this.criterio = criterio;
+	}
+	
 	@Override
 	public List<Pet> buscarPet(List<Pet> listaPets) {
 		informacaoPet1 = informacaoPet1.toUpperCase();

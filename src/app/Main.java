@@ -1,11 +1,14 @@
 package app;
 
-import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
+import controller.BuscarDoisCriterios;
+import controller.BuscarUmCriterio;
+import controller.ConsultaService;
 import model.Endereco;
 import model.Pet;
+import model.enums.Criterio;
 import model.enums.SexoPet;
 import model.enums.TipoPet;
 import view.Menu;
@@ -14,8 +17,8 @@ public class Main {
 
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
-		String caminhoFormulario = "C:\\Users\\gabri\\OneDrive\\Área de Trabalho\\SistemaAdocaoPets\\formulario\\formulario.txt";
-		String caminhoDirCadastro = "C:\\Users\\gabri\\OneDrive\\Área de Trabalho\\SistemaAdocaoPets\\petsCadastrados";
+		final String caminhoFormulario = "C:\\Users\\gabri\\OneDrive\\Área de Trabalho\\SistemaAdocaoPets\\formulario\\formulario.txt";
+		final String caminhoDirCadastro = "C:\\Users\\gabri\\OneDrive\\Área de Trabalho\\SistemaAdocaoPets\\petsCadastrados";
 		Integer respostaMenuCadastro; 
 		
 		Menu.inicio();
@@ -155,6 +158,70 @@ public class Main {
 			if(pet.cadastrar(caminhoDirCadastro)) System.out.println("\nPet cadastrado com sucesso.");
 			break;
 		case 2:
+			Menu.menuBuscaPets();
+			int respostaBusca;
+			
+			do {
+				System.out.print(" > ");
+				respostaBusca = sc.nextInt();
+			} while(respostaBusca < 1 && respostaBusca > 11);
+			
+			switch(respostaBusca) {
+			case 1:
+				System.out.println("Nome: ");
+				String nomePet = sc.nextLine();
+				consultarPet(nomePet, Criterio.NOME, caminhoDirCadastro);
+			case 2:
+				System.out.println("Sexo: ");
+				String sexoPet = sc.nextLine();
+				consultarPet(sexoPet, Criterio.SEXO, caminhoDirCadastro);
+			case 3:
+				System.out.println("Idade: ");
+				String idadePet = sc.nextLine();
+				consultarPet(idadePet, Criterio.IDADE, caminhoDirCadastro);
+			case 4:
+				System.out.println("Peso: ");
+				String pesoPet = sc.nextLine();
+				consultarPet(pesoPet, Criterio.PESO, caminhoDirCadastro);
+			case 5:
+				System.out.println("Raca: ");
+				String racaPet = sc.nextLine();
+				consultarPet(racaPet, Criterio.RACA, caminhoDirCadastro);
+			case 6:
+				System.out.println("Endereco: ");
+				String enderecoPet = sc.nextLine();
+				consultarPet(enderecoPet, Criterio.ENDERECO, caminhoDirCadastro);
+			case 7:
+				System.out.println("Nome: ");
+				nomePet = sc.nextLine();
+				System.out.println("Idade: ");
+				idadePet = sc.nextLine();
+				consultarPet(nomePet, idadePet, Criterio.NOME_IDADE, caminhoDirCadastro);
+			case 8:
+				System.out.println("Idade: ");
+				idadePet = sc.nextLine();
+				System.out.println("Peso: ");
+				pesoPet = sc.nextLine();
+				consultarPet(idadePet, pesoPet, Criterio.IDADE_PESO, caminhoDirCadastro);
+			case 9:
+				System.out.println("Nome: ");
+				nomePet = sc.nextLine();
+				System.out.println("Peso: ");
+				pesoPet = sc.nextLine();
+				consultarPet(nomePet, pesoPet, Criterio.NOME_PESO, caminhoDirCadastro);
+			case 10:
+				System.out.println("Raca: ");
+				racaPet = sc.nextLine();
+				System.out.println("Peso: ");
+				pesoPet = sc.nextLine();
+				consultarPet(racaPet, pesoPet, Criterio.RACA_PESO, caminhoDirCadastro);
+			case 11:	
+				System.out.println("Sexo: ");
+				sexoPet= sc.nextLine();
+				System.out.println("Raca: ");
+				racaPet = sc.nextLine();
+				consultarPet(sexoPet, racaPet, Criterio.SEXO_RACA, caminhoDirCadastro);
+			}
 			
 		case 3:
 			
@@ -170,4 +237,32 @@ public class Main {
 		sc.close();
 	}
 
+	
+	public static void consultarPet(String informacao, Criterio criterio, String diretorio) {
+		ConsultaService consulta = new ConsultaService(diretorio, new BuscarUmCriterio(informacao, criterio));
+		List<Pet> petsEncontrados = consulta.consultar();
+		int count = 1;
+		if(!petsEncontrados.isEmpty()) {
+			for(Pet petEncontrado : petsEncontrados) {
+				System.out.printf("%d pet(s) encontrado(s):\n", petsEncontrados.size());
+				System.out.println(count + " -> " + petEncontrado);
+				count++;						
+			}
+		}
+		else System.out.println("Nenhum pet encontrado.");
+	}
+	
+	public static void consultarPet(String informacao1, String informacao2, Criterio criterio, String diretorio) {
+		ConsultaService consulta = new ConsultaService(diretorio, new BuscarDoisCriterios(informacao1, informacao2, criterio));
+		List<Pet> petsEncontrados = consulta.consultar();
+		int count = 1;
+		if(!petsEncontrados.isEmpty()) {
+			for(Pet petEncontrado : petsEncontrados) {
+				System.out.printf("%d pet(s) encontrado(s):\n", petsEncontrados.size());
+				System.out.println(count + " -> " + petEncontrado);
+				count++;						
+			}
+		}
+		else System.out.println("Nenhum pet encontrado.");
+	}
 }

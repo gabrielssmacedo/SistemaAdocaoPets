@@ -1,7 +1,10 @@
 package app;
 
+import java.io.File;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
+import java.util.Set;
 
 import controller.BuscarDoisCriterios;
 import controller.BuscarUmCriterio;
@@ -250,7 +253,19 @@ public class Main {
 			
 			break;
 		case 4:
-			//listaTodosPets
+			ConsultaService listaPets = new ConsultaService(caminhoDirCadastro);
+			
+			Map<Pet, File> petsMap = listaPets.listarTodosPets();
+			
+			Set<Pet> petsSet = petsMap.keySet();
+			
+			if(!petsSet.isEmpty()) {
+				System.out.printf("%d pet(s) foram encontrado(s):\n", petsSet.size());
+				petsSet.forEach(System.out::println);
+			}
+			else System.out.println("Nenhum pet cadastrado.");
+			
+			break;
 		case 5:
 			Menu.menuBuscaPets();
 			

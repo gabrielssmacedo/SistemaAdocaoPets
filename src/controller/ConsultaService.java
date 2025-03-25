@@ -20,6 +20,10 @@ public class ConsultaService {
 	private String diretorio;
 	private Busca tipoBusca;
 	
+	public ConsultaService(String diretorio) {
+		this.diretorio = diretorio;
+	}
+	
 	public ConsultaService(String diretorio, Busca tipoBusca) {
 		this.diretorio = diretorio;
 		this.tipoBusca = tipoBusca;

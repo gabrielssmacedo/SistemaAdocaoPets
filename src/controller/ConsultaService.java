@@ -43,12 +43,12 @@ public class ConsultaService {
 	public Map<Pet, File> listarTodosPets(){
 		File diretorioCadastro = new File(diretorio);
 		File[] arqPetsCadastrados = diretorioCadastro.listFiles();
-		List<String> infoPets = new ArrayList<>();
 		List<Pet> listaPets = new ArrayList<>();
 		Map<Pet, File> petsCadastrados = new LinkedHashMap<>();
 		
 		for(File caminho : arqPetsCadastrados) {
 			try(BufferedReader br = new BufferedReader(new FileReader(caminho))){
+				List<String> infoPets = new ArrayList<>();
 				String line = br.readLine();
 				
 				while(line != null) {
@@ -74,9 +74,13 @@ public class ConsultaService {
 	
 	
 	private Pet converterPet(List<String> infoPets) {
+		Endereco endereco;
 		String[] infoEndereco = infoPets.get(3).split(", ");
-		
-		Endereco endereco = new Endereco(Integer.parseInt(infoEndereco[1]), infoEndereco[2], infoEndereco[0]);
+	
+		if(infoEndereco[1].equalsIgnoreCase("Nao Informado")) {
+			endereco = new Endereco(infoEndereco[2], infoEndereco[0]);
+		}
+		else endereco = new Endereco(Integer.parseInt(infoEndereco[1]), infoEndereco[2], infoEndereco[0]);
 		String[] idade = infoPets.get(4).split(" anos");
 		String[] peso = infoPets.get(5).split("kg");
 		

@@ -42,17 +42,17 @@ public class Main {
 			Endereco endereco = null;
 			String respostaFormulario;
 			Integer indice;
-			System.out.println("Para realizar o cadastro, responda as perguntas a seguir:");
+			System.out.println("\nPara realizar o cadastro, responda as perguntas a seguir:");
 			
 			if(perguntas.isEmpty()) break;
 			try {
 				for(indice = 0; indice < perguntas.size(); indice++) {
-					System.out.println(perguntas.get(indice));
+					System.out.println("\n\033[1m" + perguntas.get(indice) + "\033[0m");
 					switch(indice) {
 					case 0:
 						do {
 							sc.nextLine();
-							System.out.print(" > ");
+							System.out.print(" >> ");
 							respostaFormulario = sc.nextLine();
 						} while(!Menu.validaRespostas(respostaFormulario, indice));
 						nome = respostaFormulario;
@@ -61,9 +61,8 @@ public class Main {
 					case 1:
 						String auxTipo;
 						do {
-							System.out.print(" > ");
+							System.out.print(" >> ");
 							auxTipo = sc.next();
-							System.out.println(auxTipo);
 						} while(!auxTipo.toUpperCase().equalsIgnoreCase("GATO") && !auxTipo.toUpperCase().equalsIgnoreCase("CACHORRO"));
 						tipo = TipoPet.valueOf(auxTipo.toUpperCase());
 						
@@ -72,7 +71,7 @@ public class Main {
 						String auxSexo;
 						do {
 							sc.nextLine();
-							System.out.print(" > ");
+							System.out.print(" >> ");
 							auxSexo = sc.next().toUpperCase();
 						} while(!auxSexo.toUpperCase().equalsIgnoreCase("MACHO") && !auxSexo.toUpperCase().equalsIgnoreCase("FEMEA"));
 						sexo = SexoPet.valueOf(auxSexo.toUpperCase());
@@ -81,11 +80,15 @@ public class Main {
 					case 3:
 						String cidade, rua, numero = null;
 						sc.nextLine();
-						System.out.print(" > Cidade: ");
-						cidade = sc.nextLine();
-				
-						System.out.print(" > Rua: ");
-						rua = sc.nextLine();
+						do {
+							System.out.print(" > Cidade: ");
+							cidade = sc.nextLine();							
+						} while(cidade.isEmpty());
+						
+						do {
+							System.out.print(" > Rua: ");
+							rua = sc.nextLine();							
+						} while(rua.isEmpty());
 						
 						System.out.print(" > Numero da casa: ");
 						numero = sc.nextLine();
@@ -100,19 +103,17 @@ public class Main {
 							mesesOuAno = sc.next().charAt(0);
 						} while(mesesOuAno != 'm' && mesesOuAno != 'a');
 						
-						System.out.print(" > ");
+						System.out.print(" >> ");
 						sc.nextLine();
 						respostaFormulario = sc.nextLine();
 						
 						if(mesesOuAno == 'm' && !respostaFormulario.isEmpty()) {
-							System.out.println("Passou");
-							
 							respostaFormulario = String.valueOf(Integer.parseInt(respostaFormulario) / 12);
 						}
 						
 						if(!respostaFormulario.isEmpty()) {
 							while(!Menu.validaRespostas(respostaFormulario, indice)) {
-								System.out.print(" > ");
+								System.out.print(" >> ");
 								respostaFormulario = sc.nextLine();
 							}
 						}
@@ -260,7 +261,7 @@ public class Main {
 			Set<Pet> petsSet = petsMap.keySet();
 			
 			if(!petsSet.isEmpty()) {
-				System.out.printf("%d pet(s) foram encontrado(s):\n", petsSet.size());
+				System.out.printf("\n\033[1m%d pet(s) cadastrado(s):\033[0m\n\n", petsSet.size());
 				petsSet.forEach(System.out::println);
 			}
 			else System.out.println("Nenhum pet cadastrado.");

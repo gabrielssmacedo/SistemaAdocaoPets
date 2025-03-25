@@ -10,6 +10,12 @@ public class Endereco {
 		this.cidade = cidade;
 		this.rua = rua;
 	}
+	
+	public Endereco(String cidade, String rua) {
+		this.cidade = cidade;
+		this.rua = rua;
+	}
+	
 
 	public Integer getNumero() {
 		return numero;

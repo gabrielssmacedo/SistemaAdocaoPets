@@ -183,15 +183,26 @@ public class Pet {
 
 	@Override
 	public String toString() {
-		return getNome() + " - " 
-			 + getTipo() + " - "
-			 + getSexo() + " - " 
-			 + getEndereco().getRua() + ", "
-			 + getEndereco().getNumero() + ", "
-			 + getEndereco().getCidade() + " - " 
-			 + getIdade() + " - "
-			 + getPeso() + " - " 
-			 + getRaca();
+		StringBuilder sb = new StringBuilder();
+		sb.append(getNome());
+		sb.append(" - ");
+		sb.append(getTipo());
+		sb.append(" - ");
+		sb.append(getSexo());
+		sb.append(" - ");
+		sb.append(getEndereco().getRua());
+		sb.append(", ");
+		sb.append(getEndereco().getNumero() == null? respostaVazia : getEndereco().getNumero());
+		sb.append(", ");
+		sb.append(getEndereco().getCidade());
+		sb.append(" - ");
+		sb.append(getIdade() == null? respostaVazia : idade);
+		sb.append(" - ");
+		sb.append(getPeso() == null? respostaVazia : peso );
+		sb.append(" - ");
+		sb.append(getRaca() == null? respostaVazia : raca);
+		
+		return sb.toString();
 	}
 
 }

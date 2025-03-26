@@ -29,7 +29,7 @@ public class ConsultaService {
 		this.tipoBusca = tipoBusca;
 	}
 	
-	public List<Pet> consultar() {
+	public List<Pet> consultar(String tipoPet) {
 		List<Pet> listaPets = new ArrayList<>();
 		Set<Pet> conjuntoPets = listarTodosPets().keySet();
 		
@@ -37,7 +37,7 @@ public class ConsultaService {
 			listaPets.add(pet);
 		}
 		
-		return tipoBusca.buscarPet(listaPets);
+		return tipoBusca.buscarPet(listaPets, tipoPet);
 	}
 	
 	public Map<Pet, File> listarTodosPets(){

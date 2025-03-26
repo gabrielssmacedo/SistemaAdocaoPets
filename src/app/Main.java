@@ -162,6 +162,12 @@ public class Main {
 			if(pet.cadastrar(caminhoDirCadastro)) System.out.println("\nPet cadastrado com sucesso.");
 			break;
 		case 2:
+			String tipoPetBusca; 
+			do {
+				System.out.println("\nTipo do Pet: ");
+				tipoPetBusca = sc.next();
+			} while(!tipoPetBusca.toUpperCase().equalsIgnoreCase("CACHORRO") && !tipoPetBusca.toUpperCase().equalsIgnoreCase("GATO"));
+			
 			Menu.menuBuscaPets();
 			int respostaBusca;
 			List<Pet> petsEncontrados;
@@ -172,7 +178,7 @@ public class Main {
 			
 			sc.nextLine();
 			
-			petsEncontrados = consultarPet(respostaBusca, sc, caminhoDirCadastro);
+			petsEncontrados = consultarPet(respostaBusca, sc, caminhoDirCadastro, tipoPetBusca);
 			
 			
 			if(!petsEncontrados.isEmpty()) { 
@@ -223,6 +229,12 @@ public class Main {
 		case 3:
 			int respostaDelecao;
 			String respostaConfirmacao;
+			
+			do {
+				System.out.println("\nTipo do Pet: ");
+				tipoPetBusca = sc.next();
+			} while(!tipoPetBusca.toUpperCase().equalsIgnoreCase("CACHORRO") && !tipoPetBusca.toUpperCase().equalsIgnoreCase("GATO"));
+			
 			Menu.menuBuscaPets();
 			ConsultaService buscarTodosPets = new ConsultaService(caminhoDirCadastro);
 			do {
@@ -232,7 +244,7 @@ public class Main {
 			
 			sc.nextLine();
 			
-			List<Pet> petsEncontradosCase3 = consultarPet(respostaBusca, sc, caminhoDirCadastro);
+			List<Pet> petsEncontradosCase3 = consultarPet(respostaBusca, sc, caminhoDirCadastro, tipoPetBusca);
 			
 			if(!petsEncontradosCase3.isEmpty()) { 
 				System.out.printf("%d pet(s) encontrado(s):\n", petsEncontradosCase3.size());
@@ -276,6 +288,11 @@ public class Main {
 			
 			break;
 		case 5:
+			do {
+				System.out.println("\nTipo do Pet: ");
+				tipoPetBusca = sc.next();
+			} while(!tipoPetBusca.toUpperCase().equalsIgnoreCase("CACHORRO") && !tipoPetBusca.toUpperCase().equalsIgnoreCase("GATO"));
+			
 			Menu.menuBuscaPets();
 			
 			do {
@@ -285,9 +302,7 @@ public class Main {
 			
 			sc.nextLine();
 			
-			List<Pet> petsEncontradosCase5 = consultarPet(respostaBusca, sc, caminhoDirCadastro);
-			
-			
+			List<Pet> petsEncontradosCase5 = consultarPet(respostaBusca, sc, caminhoDirCadastro, tipoPetBusca.toUpperCase());
 			
 			if(!petsEncontradosCase5.isEmpty()) { 
 				System.out.printf("%d pet(s) encontrado(s):\n", petsEncontradosCase5.size());
@@ -303,55 +318,47 @@ public class Main {
 		sc.close();
 	}
 	
-	public static List<Pet> consultarPet(int tipoBusca, Scanner sc, String diretorioCadastrados){
+	public static List<Pet> consultarPet(int tipoBusca, Scanner sc, String diretorioCadastrados, String tipoPetBusca){
 		List<Pet> pets = null;
 		switch(tipoBusca) {
 		case 1:
 			System.out.println("Nome: ");
 			String nomePet = sc.nextLine();
-			pets = buscarPet(nomePet, Criterio.NOME, diretorioCadastrados);
-			if(!pets.isEmpty()) pets.forEach(System.out::println);
-			else System.out.println("Nenhum pet encontrado.");
+			pets = buscarPet(nomePet, Criterio.NOME, diretorioCadastrados, tipoPetBusca);
 			
 			break;
 		case 2:
-			System.out.println("Sexo: ");
-			String sexoPet = sc.nextLine();
-			pets = buscarPet(sexoPet, Criterio.SEXO, diretorioCadastrados);
-			if(!pets.isEmpty()) pets.forEach(System.out::println);
-			else System.out.println("Nenhum pet encontrado.");
+			String sexoPet;
+			do {
+				System.out.println("Sexo: ");
+				sexoPet = sc.nextLine();				
+			} while(!sexoPet.toUpperCase().equalsIgnoreCase("MACHO") && !sexoPet.toUpperCase().equalsIgnoreCase("FEMEA"));
+			
+			pets = buscarPet(sexoPet, Criterio.SEXO, diretorioCadastrados, tipoPetBusca);
 			
 			break;
 		case 3:
 			System.out.println("Idade: ");
 			String idadePet = sc.nextLine();
-			pets = buscarPet(idadePet, Criterio.IDADE, diretorioCadastrados);
-			if(!pets.isEmpty()) pets.forEach(System.out::println);
-			else System.out.println("Nenhum pet encontrado.");
+			pets = buscarPet(idadePet, Criterio.IDADE, diretorioCadastrados, tipoPetBusca);
 			
 			break;
 		case 4:
 			System.out.println("Peso: ");
 			String pesoPet = sc.nextLine();
-			pets = buscarPet(pesoPet, Criterio.PESO, diretorioCadastrados);
-			if(!pets.isEmpty()) pets.forEach(System.out::println);
-			else System.out.println("Nenhum pet encontrado.");
+			pets = buscarPet(pesoPet, Criterio.PESO, diretorioCadastrados, tipoPetBusca);
 			
 			break;
 		case 5:
 			System.out.println("Raca: ");
 			String racaPet = sc.nextLine();
-			pets = buscarPet(racaPet, Criterio.RACA, diretorioCadastrados);
-			if(!pets.isEmpty()) pets.forEach(System.out::println);
-			else System.out.println("Nenhum pet encontrado.");
-			
+			pets = buscarPet(racaPet, Criterio.RACA, diretorioCadastrados, tipoPetBusca);
+
 			break;
 		case 6:
 			System.out.println("Endereco: ");
 			String enderecoPet = sc.nextLine();
-			pets = buscarPet(enderecoPet, Criterio.ENDERECO, diretorioCadastrados);
-			if(!pets.isEmpty()) pets.forEach(System.out::println);
-			else System.out.println("Nenhum pet encontrado.");
+			pets = buscarPet(enderecoPet, Criterio.ENDERECO, diretorioCadastrados, tipoPetBusca);
 			
 			break;
 		case 7:
@@ -359,9 +366,7 @@ public class Main {
 			nomePet = sc.nextLine();
 			System.out.println("Idade: ");
 			idadePet = sc.nextLine();
-			pets = buscarPet(nomePet, idadePet, Criterio.NOME_IDADE, diretorioCadastrados);
-			if(!pets.isEmpty()) pets.forEach(System.out::println);
-			else System.out.println("Nenhum pet encontrado.");
+			pets = buscarPet(nomePet, idadePet, Criterio.NOME_IDADE, diretorioCadastrados,tipoPetBusca);
 			
 			break;
 		case 8:
@@ -369,9 +374,7 @@ public class Main {
 			idadePet = sc.nextLine();
 			System.out.println("Peso: ");
 			pesoPet = sc.nextLine();
-			pets = buscarPet(idadePet, pesoPet, Criterio.IDADE_PESO, diretorioCadastrados);
-			if(!pets.isEmpty()) pets.forEach(System.out::println);
-			else System.out.println("Nenhum pet encontrado.");
+			pets = buscarPet(idadePet, pesoPet, Criterio.IDADE_PESO, diretorioCadastrados, tipoPetBusca);
 			
 			break;
 		case 9:
@@ -379,9 +382,7 @@ public class Main {
 			nomePet = sc.nextLine();
 			System.out.println("Peso: ");
 			pesoPet = sc.nextLine();
-			pets = buscarPet(nomePet, pesoPet, Criterio.NOME_PESO, diretorioCadastrados);
-			if(!pets.isEmpty()) pets.forEach(System.out::println);
-			else System.out.println("Nenhum pet encontrado.");
+			pets = buscarPet(nomePet, pesoPet, Criterio.NOME_PESO, diretorioCadastrados, tipoPetBusca);
 			
 			break;
 		case 10:
@@ -389,18 +390,18 @@ public class Main {
 			racaPet = sc.nextLine();
 			System.out.println("Peso: ");
 			pesoPet = sc.nextLine();
-			pets = buscarPet(racaPet, pesoPet, Criterio.RACA_PESO, diretorioCadastrados);
-			if(!pets.isEmpty()) pets.forEach(System.out::println);
-			else System.out.println("Nenhum pet encontrado.");
+			pets = buscarPet(racaPet, pesoPet, Criterio.RACA_PESO, diretorioCadastrados, tipoPetBusca);
 			
 			break;
 		case 11:	
-			System.out.println("Sexo: ");
-			sexoPet= sc.nextLine();
+			do {
+				System.out.println("Sexo: ");
+				sexoPet = sc.nextLine();				
+			} while(!sexoPet.toUpperCase().equalsIgnoreCase("MACHO") && !sexoPet.toUpperCase().equalsIgnoreCase("FEMEA"));
+			
 			System.out.println("Raca: ");
 			racaPet = sc.nextLine();
-			pets = buscarPet(sexoPet, racaPet, Criterio.SEXO_RACA, diretorioCadastrados);
-			
+			pets = buscarPet(sexoPet, racaPet, Criterio.SEXO_RACA, diretorioCadastrados, tipoPetBusca);
 			
 			break;
 		}
@@ -408,15 +409,15 @@ public class Main {
 		return pets;
 	}
 	
-	public static List<Pet> buscarPet(String informacao, Criterio criterio, String diretorio) {
+	public static List<Pet> buscarPet(String informacao, Criterio criterio, String diretorio, String tipoPet) {
 		ConsultaService consulta = new ConsultaService(diretorio, new BuscarUmCriterio(informacao, criterio));
-		List<Pet> petsEncontrados = consulta.consultar();
+		List<Pet> petsEncontrados = consulta.consultar(tipoPet);
 		return petsEncontrados;
 	}
 	
-	public static List<Pet> buscarPet(String informacao1, String informacao2, Criterio criterio, String diretorio) {
+	public static List<Pet> buscarPet(String informacao1, String informacao2, Criterio criterio, String diretorio, String tipoPet) {
 		ConsultaService consulta = new ConsultaService(diretorio, new BuscarDoisCriterios(informacao1, informacao2, criterio));
-		List<Pet> petsEncontrados = consulta.consultar();
+		List<Pet> petsEncontrados = consulta.consultar(tipoPet);
 		return petsEncontrados;
 	}
 }

@@ -21,9 +21,9 @@ public class BuscarDoisCriterios implements Busca{
 	}
 	
 	@Override
-	public List<Pet> buscarPet(List<Pet> listaPets) {
-		informacaoPet1 = informacaoPet1.toUpperCase();
-		informacaoPet2 = informacaoPet2.toUpperCase();
+	public List<Pet> buscarPet(List<Pet> listaPets, String tipoPet) {
+		informacaoPet1 = informacaoPet1.toUpperCase().trim();
+		informacaoPet2 = informacaoPet2.toUpperCase().trim();
 		
 		switch(criterio) {
 		case NOME_IDADE:
@@ -40,11 +40,11 @@ public class BuscarDoisCriterios implements Busca{
 					.collect(Collectors.toList());
 		case RACA_PESO:
 			return listaPets.stream()
-					.filter(pet -> pet.getRaca().toUpperCase() == informacaoPet1 && pet.getPeso() == Double.parseDouble(informacaoPet2))
+					.filter(pet -> pet.getRaca().toUpperCase().contains(informacaoPet1) && pet.getPeso() == Double.parseDouble(informacaoPet2))
 					.collect(Collectors.toList());
 		case SEXO_RACA:
 			return listaPets.stream()
-					.filter(pet -> pet.getSexo() == SexoPet.valueOf(informacaoPet1) && pet.getRaca().toUpperCase() == informacaoPet2)
+					.filter(pet -> pet.getSexo() == SexoPet.valueOf(informacaoPet1) && pet.getRaca().toUpperCase().contains(informacaoPet2))
 					.collect(Collectors.toList());
 		default:
 			return null;

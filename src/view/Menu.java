@@ -8,8 +8,8 @@ import java.util.List;
 
 
 public final class Menu {
-	private final static String abreNegrito = "\\033[1m";
-	private final static String fechaNegrito = "\\033[0m";
+	private final static String abreNegrito = "\033[1m";
+	private final static String fechaNegrito = "\033[0m";
 	
 	public static void menuCadastro() {
 		System.out.println("Deseja:");
@@ -88,14 +88,14 @@ public final class Menu {
 		int numBarras = 132;
 		int numEspacos = 53;
 		for(int i = 0; i < numBarras; i++) System.out.print(barra);
-		System.out.print("\n|");
+		System.out.print(abreNegrito + "\n|" + fechaNegrito);
 		for(int i = 0; i < numEspacos; i++) System.out.print(espaco);
 		System.out.print(abreNegrito + "SISTEMA DE ADOÇÃO DE PETS" + fechaNegrito);
 		for(int i = 0; i < numEspacos-1; i++) System.out.print(espaco);
-		System.out.print("|\n");
-		for(int i = 0; i < numBarras; i++) System.out.print(barra);
+		System.out.print(abreNegrito + "|\n" + fechaNegrito);
+		for(int i = 0; i < numBarras; i++) System.out.print(abreNegrito + barra + fechaNegrito);
 		System.out.println("\n");
-		System.out.println("Bem vindo ao Sistema de cadastro para a Adoção de Pets!\n");
+		System.out.println(abreNegrito + "Bem vindo ao Sistema de cadastro para a Adoção de Pets!\n" + fechaNegrito);
 	}
 	
 	private static boolean temCaracteresEspeciais(String s) {

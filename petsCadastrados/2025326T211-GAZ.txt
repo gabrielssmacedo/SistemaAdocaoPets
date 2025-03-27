@@ -1,0 +1,7 @@
+1 - Gazma
+2 - CACHORRO
+3 - FEMEA
+4 - Rua Paulistana, 903, Sao Paulo
+5 - 20,0 anos
+6 - 43,0kg
+7 - XouXou

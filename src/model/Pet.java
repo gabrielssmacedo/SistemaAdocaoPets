@@ -146,19 +146,21 @@ public class Pet {
 		return false;
 	}
 	
-	public boolean alterarCadastro(String caminhoArquivo) {
-		
+	public boolean alterarCadastro(String caminhoArquivo) throws IOException{
+		if(caminhoArquivo.isEmpty()) throw new IOException("Não foi possivel encontrar o pet");
 		try(BufferedWriter bw = new BufferedWriter(new FileWriter(caminhoArquivo))){
-			bw.write(String.format("1 - %s\n", nome));
-			bw.write(String.format("2 - %s\n", tipo));
-			bw.write(String.format("3 - %s\n", sexo));
+			bw.write(String.format("1 - %s\n", this.nome));
+			bw.write(String.format("2 - %s\n", this.tipo));
+			bw.write(String.format("3 - %s\n", this.sexo));
 			bw.write(String.format("4 - %s\n", 
 					  endereco.getRua() + ", "
 					+ String.valueOf(endereco.getNumero()) + ", "
 					+ endereco.getCidade()));
-			bw.write(String.format("5 - %.1f anos\n", idade));
-			bw.write(String.format("6 - %.1fkg\n", peso));
-			bw.write(String.format("7 - %s\n", raca));
+			bw.write(String.format("5 - %.1f anos\n", this.idade));
+			bw.write(String.format("6 - %.1fkg\n", this.peso));
+			bw.write(String.format("7 - %s\n", this.raca));
+			System.out.println("Cadastro alterado com sucesso");
+			
 			return true;
 		}
 		catch(IOException e) {
@@ -182,9 +184,11 @@ public class Pet {
 		return true;
 	}
 
+	
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(nome, sexo, tipo);
+		return Objects.hash(endereco, idade, nome, peso, raca, sexo, tipo);
 	}
 
 	@Override
@@ -196,7 +200,9 @@ public class Pet {
 		if (getClass() != obj.getClass())
 			return false;
 		Pet other = (Pet) obj;
-		return Objects.equals(nome, other.nome) && sexo == other.sexo && tipo == other.tipo;
+		return Objects.equals(endereco, other.endereco) && Objects.equals(idade, other.idade)
+				&& Objects.equals(nome, other.nome) && Objects.equals(peso, other.peso)
+				&& Objects.equals(raca, other.raca) && sexo == other.sexo && tipo == other.tipo;
 	}
 
 	@Override

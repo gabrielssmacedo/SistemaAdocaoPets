@@ -1,6 +1,7 @@
 package app;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -23,7 +24,7 @@ public class Main {
 		final String caminhoFormulario = "C:\\Users\\gabri\\OneDrive\\Área de Trabalho\\SistemaAdocaoPets\\formulario\\formulario.txt";
 		final String caminhoDirCadastro = "C:\\Users\\gabri\\OneDrive\\Área de Trabalho\\SistemaAdocaoPets\\petsCadastrados";
 		Integer respostaMenuCadastro; 
-		
+		ConsultaService buscarTodosPets = new ConsultaService(caminhoDirCadastro);
 		Menu.inicio();
 		
 		Menu.menuCadastro();
@@ -162,7 +163,10 @@ public class Main {
 			if(pet.cadastrar(caminhoDirCadastro)) System.out.println("\nPet cadastrado com sucesso.");
 			break;
 		case 2:
-			String tipoPetBusca; 
+			String tipoPetBusca;
+			String novoNome, novaCidade, novaRua, novaRaca;
+			Double novaIdade, novoPeso;
+			Integer novoNumero;
 			do {
 				System.out.println("\nTipo do Pet: ");
 				tipoPetBusca = sc.next();
@@ -171,6 +175,7 @@ public class Main {
 			Menu.menuBuscaPets();
 			int respostaBusca;
 			List<Pet> petsEncontrados;
+			
 			do {
 				System.out.print("\n >> ");
 				respostaBusca = sc.nextInt();
@@ -192,35 +197,49 @@ public class Main {
 				sc.nextLine();
 				
 				System.out.println("Nome: ");
-				nome = sc.nextLine();
+				novoNome = sc.nextLine();
 				
 				System.out.println("Cidade: ");
-				String cidade = sc.nextLine();
+				novaCidade = sc.nextLine();
 				
 				System.out.println("Rua: ");
-				String rua = sc.nextLine();
+				novaRua = sc.nextLine();
 				
 				System.out.println("Numero: ");
-				int numero = sc.nextInt();
+				novoNumero = sc.nextInt();
 				
 				System.out.println("Idade: ");
-				idade = sc.nextDouble();
+				novaIdade = sc.nextDouble();
 				
 				System.out.println("Peso: ");
-				peso = sc.nextDouble();
+				novoPeso = sc.nextDouble();
 				
 				System.out.println("Raca: ");
 				sc.nextLine();
-				raca = sc.nextLine();
+				novaRaca = sc.nextLine();
 				
-				Pet novoPet = petsEncontrados.get(respostaEscolhaCadastro-1);
-				novoPet.setNome(nome);
-				novoPet.setEndereco(new Endereco(numero, cidade, rua));
-				novoPet.setIdade(idade);
-				novoPet.setPeso(peso);
-				novoPet.setRaca(raca);
+				Map<Pet, File> petsMap = buscarTodosPets.listarTodosPets();
+				Set<Pet> petsSet = petsMap.keySet();
+				File arqPet = null;
 				
-				novoPet.alterarCadastro(caminhoDirCadastro);
+				for(Pet petCadastrado : petsSet) {
+					if(petCadastrado.equals(petsEncontrados.get(respostaEscolhaCadastro-1)))
+						arqPet = petsMap.get(petCadastrado);
+				}
+				
+				Pet novoPet = new Pet(novoNome 
+						, petsEncontrados.get(respostaEscolhaCadastro-1).getTipo()
+						, petsEncontrados.get(respostaEscolhaCadastro-1).getSexo() 
+						, new Endereco(novoNumero, novaCidade, novaRua)
+						, novaIdade
+						, novoPeso
+						, novaRaca);
+				
+				try {
+					novoPet.alterarCadastro(String.valueOf(arqPet));
+				} catch (IOException e) {
+					System.out.println(e.getMessage());
+				}
 				
 			}
 			else System.out.println("Nenhum pet encontrado.");
@@ -236,7 +255,7 @@ public class Main {
 			} while(!tipoPetBusca.toUpperCase().equalsIgnoreCase("CACHORRO") && !tipoPetBusca.toUpperCase().equalsIgnoreCase("GATO"));
 			
 			Menu.menuBuscaPets();
-			ConsultaService buscarTodosPets = new ConsultaService(caminhoDirCadastro);
+			
 			do {
 				System.out.print("\n > ");
 				respostaBusca = sc.nextInt();

@@ -62,7 +62,7 @@ public class ConsultaService {
 				listaPets.add(pet);
 			}
 			catch(IOException e) {
-				System.out.println("Erro na leitura do arquivo.");
+				System.out.println("\u001B[3m" + "Erro na leitura do arquivo." + "\u001B[0m");
 				return null;
 			}
 		}
@@ -83,16 +83,16 @@ public class ConsultaService {
 		String[] idade = infoPets.get(4).split(" anos");
 		String[] peso = infoPets.get(5).split("kg");
 		
-		idade[0] = idade[0].replace(',', '.');
-		peso[0] = peso[0].replace(',', '.');
+		if(!idade[0].toUpperCase().equalsIgnoreCase("NAO INFORMADO")) idade[0] = idade[0].replace(',', '.');
+		if(!peso[0].toUpperCase().equalsIgnoreCase("NAO INFORMADO")) peso[0] = peso[0].replace(',', '.');
 		
 		Pet pet = new Pet(
 				infoPets.get(0)
 				, TipoPet.valueOf(infoPets.get(1).toUpperCase())
 				, SexoPet.valueOf(infoPets.get(2).toUpperCase())
 				, endereco
-				, Double.parseDouble(idade[0])
-				, Double.parseDouble(peso[0])
+				, idade[0].toUpperCase().equalsIgnoreCase("NAO INFORMADO")? null : Double.parseDouble(idade[0])
+				, peso[0].toUpperCase().equalsIgnoreCase("NAO INFORMADO")? null : Double.parseDouble(peso[0])
 				, infoPets.get(6)
 				);
 		

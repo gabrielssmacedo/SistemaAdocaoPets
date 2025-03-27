@@ -20,11 +20,17 @@ import view.Menu;
 public class Main {
 
 	public static void main(String[] args) {
+		final String negrito = "\033[1m";
+	    final String fechaNegrito = "\033[0m";
+		final String italico = "\u001B[3m";
+		final String fechaItalico = "\u001B[0m";
+		
 		Scanner sc = new Scanner(System.in);
 		final String caminhoFormulario = "C:\\Users\\gabri\\OneDrive\\Área de Trabalho\\SistemaAdocaoPets\\formulario\\formulario.txt";
 		final String caminhoDirCadastro = "C:\\Users\\gabri\\OneDrive\\Área de Trabalho\\SistemaAdocaoPets\\petsCadastrados";
 		Integer respostaMenuCadastro; 
 		ConsultaService buscarTodosPets = new ConsultaService(caminhoDirCadastro);
+		
 		Menu.inicio();
 		
 		do {
@@ -32,10 +38,10 @@ public class Main {
 			Menu.menuCadastro();
 			
 			do{
-				System.out.print("\n > ");
+				System.out.print("\n >> ");
 				respostaMenuCadastro = sc.nextInt();		
 			} while(respostaMenuCadastro < 1 || respostaMenuCadastro > 6);
-			
+	    
 			switch(respostaMenuCadastro) {
 			case 1:
 				List<String> perguntas = Menu.lerFormulario(caminhoFormulario);
@@ -85,16 +91,16 @@ public class Main {
 							String cidade, rua, numero = null;
 							sc.nextLine();
 							do {
-								System.out.print(" > Cidade: ");
+								System.out.print(" -> Cidade: ");
 								cidade = sc.nextLine();							
 							} while(cidade.isEmpty());
 							
 							do {
-								System.out.print(" > Rua: ");
+								System.out.print(" -> Rua: ");
 								rua = sc.nextLine();							
 							} while(rua.isEmpty());
 							
-							System.out.print(" > Numero da casa: ");
+							System.out.print(" -> Numero da casa: ");
 							numero = sc.nextLine();
 							if(!numero.isEmpty()) endereco = new Endereco(Integer.parseInt(numero), cidade, rua);
 							else endereco = new Endereco(null, cidade, rua);
@@ -103,7 +109,7 @@ public class Main {
 							char mesesOuAno;
 	
 							do {
-								System.out.print(" > Digitar em meses ou anos (m/a): ");
+								System.out.print(" -> Digitar em meses ou anos (m/a): ");
 								mesesOuAno = sc.next().charAt(0);
 							} while(mesesOuAno != 'm' && mesesOuAno != 'a');
 							
@@ -163,15 +169,21 @@ public class Main {
 				}
 				
 				Pet pet = new Pet(nome, tipo, sexo, endereco, idade, peso, raca);
-				if(pet.cadastrar(caminhoDirCadastro)) System.out.println("\nPet cadastrado com sucesso.");
+				pet.cadastrar(caminhoDirCadastro);
+				
+				linhasFormatacao();
+				
 				break;
 			case 2:
 				String tipoPetBusca;
 				String novoNome, novaCidade, novaRua, novaRaca;
 				Double novaIdade, novoPeso;
 				Integer novoNumero;
+				
+				linhasFormatacao();
+				
 				do {
-					System.out.println("\nTipo do Pet: ");
+					System.out.print("\nTipo do Pet: ");
 					tipoPetBusca = sc.next();
 				} while(!tipoPetBusca.toUpperCase().equalsIgnoreCase("CACHORRO") && !tipoPetBusca.toUpperCase().equalsIgnoreCase("GATO"));
 				
@@ -190,34 +202,39 @@ public class Main {
 				
 				
 				if(!petsEncontrados.isEmpty()) { 
-					System.out.println("Deseja alterar cadastro de:");
+					linhasFormatacao();
+					System.out.print(negrito + "\nDeseja alterar cadastro de:" + fechaNegrito);
 					for(int i = 0; i < petsEncontrados.size(); i++) {
-						System.out.println("[" + (i+1) + "] " + petsEncontrados.get(i));
+						System.out.print("\n[" + (i+1) + "] " + petsEncontrados.get(i));
 					}
-					System.out.print(" >> ");
+					System.out.print("\n\n >> ");
+					
+					
 					int respostaEscolhaCadastro = sc.nextInt();
 					
+					linhasFormatacao();
 					sc.nextLine();
+					System.out.println("\nInsira as novas informacoes: ");
 					
-					System.out.println("Nome: ");
+					System.out.print(italico + "\nNome: " + fechaItalico);
 					novoNome = sc.nextLine();
 					
-					System.out.println("Cidade: ");
+					System.out.print(italico + "Cidade: " + fechaItalico);
 					novaCidade = sc.nextLine();
 					
-					System.out.println("Rua: ");
+					System.out.print(italico + "Rua: " + fechaItalico);
 					novaRua = sc.nextLine();
 					
-					System.out.println("Numero: ");
+					System.out.print(italico + "Numero: " + fechaItalico);
 					novoNumero = sc.nextInt();
 					
-					System.out.println("Idade: ");
+					System.out.print(italico + "Idade: " + fechaItalico);
 					novaIdade = sc.nextDouble();
 					
-					System.out.println("Peso: ");
+					System.out.print(italico + "Peso: " + fechaItalico);
 					novoPeso = sc.nextDouble();
 					
-					System.out.println("Raca: ");
+					System.out.print(italico + "Raca: " + fechaItalico);
 					sc.nextLine();
 					novaRaca = sc.nextLine();
 					
@@ -245,22 +262,27 @@ public class Main {
 					}
 					
 				}
-				else System.out.println("Nenhum pet encontrado.");
+				else System.out.println(italico + "Nenhum pet encontrado.\n" + fechaItalico);
+				
+				linhasFormatacao();
 				
 				break;
 			case 3:
 				int respostaDelecao;
 				String respostaConfirmacao;
 				
+				linhasFormatacao();
+				
 				do {
-					System.out.println("\nTipo do Pet: ");
+					System.out.print("\nTipo do Pet: ");
 					tipoPetBusca = sc.next();
 				} while(!tipoPetBusca.toUpperCase().equalsIgnoreCase("CACHORRO") && !tipoPetBusca.toUpperCase().equalsIgnoreCase("GATO"));
 				
 				Menu.menuBuscaPets();
 				
+				
 				do {
-					System.out.print("\n > ");
+					System.out.print("\n >> ");
 					respostaBusca = sc.nextInt();
 				} while(respostaBusca < 1 || respostaBusca > 11);
 				
@@ -268,8 +290,10 @@ public class Main {
 				
 				List<Pet> petsEncontradosCase3 = consultarPet(respostaBusca, sc, caminhoDirCadastro, tipoPetBusca);
 				
+				linhasFormatacao();
+				
 				if(!petsEncontradosCase3.isEmpty()) { 
-					System.out.printf("%d pet(s) encontrado(s):\n", petsEncontradosCase3.size());
+					System.out.printf(negrito + "\n%d pet(s) encontrado(s):\n" + fechaNegrito, petsEncontradosCase3.size());
 					for(int i = 0; i < petsEncontradosCase3.size(); i++) {
 						System.out.println("[" + (i+1) + "] " + petsEncontradosCase3.get(i));
 					}
@@ -294,6 +318,8 @@ public class Main {
 					}	
 				}
 				
+				linhasFormatacao();
+				
 				break;
 			case 4:
 				ConsultaService listaPets = new ConsultaService(caminhoDirCadastro);
@@ -302,23 +328,31 @@ public class Main {
 				
 				Set<Pet> petsSet = petsMap.keySet();
 				
+				linhasFormatacao();
+				
 				if(!petsSet.isEmpty()) {
-					System.out.printf("\n\033[1m%d pet(s) cadastrado(s):\033[0m\n\n", petsSet.size());
+					System.out.printf(negrito + "\n%d pet(s) cadastrado(s):\n\n" + fechaNegrito, petsSet.size());
 					petsSet.forEach(System.out::println);
+					System.out.println();
 				}
-				else System.out.println("Nenhum pet cadastrado.");
+				else System.out.println(italico + "Nenhum pet cadastrado.\n" + fechaItalico);
+				
+				linhasFormatacao();
 				
 				break;
 			case 5:
+				linhasFormatacao();
+				
+				System.out.println();
 				do {
-					System.out.println("\nTipo do Pet: ");
+					System.out.print("Tipo do Pet: ");
 					tipoPetBusca = sc.next();
 				} while(!tipoPetBusca.toUpperCase().equalsIgnoreCase("CACHORRO") && !tipoPetBusca.toUpperCase().equalsIgnoreCase("GATO"));
 				
 				Menu.menuBuscaPets();
 				
 				do {
-					System.out.print("\n > ");
+					System.out.print("\n >> ");
 					respostaBusca = sc.nextInt();
 				} while(respostaBusca < 1 || respostaBusca > 11);
 				
@@ -326,25 +360,34 @@ public class Main {
 				
 				List<Pet> petsEncontradosCase5 = consultarPet(respostaBusca, sc, caminhoDirCadastro, tipoPetBusca.toUpperCase());
 				
+				linhasFormatacao();
+				
 				if(!petsEncontradosCase5.isEmpty()) { 
-					System.out.printf("%d pet(s) encontrado(s):\n", petsEncontradosCase5.size());
+					System.out.printf(negrito + "\n%d pet(s) encontrado(s):\n" + fechaNegrito, petsEncontradosCase5.size());
 					petsEncontradosCase5.forEach(System.out::println);
 				}
-				else System.out.println("Nenhum pet encontrado.");
+				else System.out.println("\nNenhum pet encontrado.\n");
 				
+				linhasFormatacao();
+				
+				break;
 			default:
 				break;
 			}
 		} while(respostaMenuCadastro != 6);
 		
+		System.out.println("\nPrograma encerrado");
+		
 		sc.close();
 	}
+	
+	
 	
 	public static List<Pet> consultarPet(int tipoBusca, Scanner sc, String diretorioCadastrados, String tipoPetBusca){
 		List<Pet> pets = null;
 		switch(tipoBusca) {
 		case 1:
-			System.out.println("Nome: ");
+			System.out.print("\n>> Nome: ");
 			String nomePet = sc.nextLine();
 			pets = buscarPet(nomePet, Criterio.NOME, diretorioCadastrados, tipoPetBusca);
 			
@@ -352,7 +395,7 @@ public class Main {
 		case 2:
 			String sexoPet;
 			do {
-				System.out.println("Sexo: ");
+				System.out.print("\n>> Sexo: ");
 				sexoPet = sc.nextLine();				
 			} while(!sexoPet.toUpperCase().equalsIgnoreCase("MACHO") && !sexoPet.toUpperCase().equalsIgnoreCase("FEMEA"));
 			
@@ -360,68 +403,68 @@ public class Main {
 			
 			break;
 		case 3:
-			System.out.println("Idade: ");
+			System.out.print("\n >> Idade: ");
 			String idadePet = sc.nextLine();
 			pets = buscarPet(idadePet, Criterio.IDADE, diretorioCadastrados, tipoPetBusca);
 			
 			break;
 		case 4:
-			System.out.println("Peso: ");
+			System.out.print("\n >> Peso: ");
 			String pesoPet = sc.nextLine();
 			pets = buscarPet(pesoPet, Criterio.PESO, diretorioCadastrados, tipoPetBusca);
 			
 			break;
 		case 5:
-			System.out.println("Raca: ");
+			System.out.print("\n >> Raca: ");
 			String racaPet = sc.nextLine();
 			pets = buscarPet(racaPet, Criterio.RACA, diretorioCadastrados, tipoPetBusca);
 
 			break;
 		case 6:
-			System.out.println("Endereco: ");
+			System.out.print("\n >> Endereco: ");
 			String enderecoPet = sc.nextLine();
 			pets = buscarPet(enderecoPet, Criterio.ENDERECO, diretorioCadastrados, tipoPetBusca);
 			
 			break;
 		case 7:
-			System.out.println("Nome: ");
+			System.out.print("\n >> Nome: ");
 			nomePet = sc.nextLine();
-			System.out.println("Idade: ");
+			System.out.print(" >> Idade: ");
 			idadePet = sc.nextLine();
 			pets = buscarPet(nomePet, idadePet, Criterio.NOME_IDADE, diretorioCadastrados,tipoPetBusca);
 			
 			break;
 		case 8:
-			System.out.println("Idade: ");
+			System.out.print("\n >> Idade: ");
 			idadePet = sc.nextLine();
-			System.out.println("Peso: ");
+			System.out.print(" >> Peso: ");
 			pesoPet = sc.nextLine();
 			pets = buscarPet(idadePet, pesoPet, Criterio.IDADE_PESO, diretorioCadastrados, tipoPetBusca);
 			
 			break;
 		case 9:
-			System.out.println("Nome: ");
+			System.out.print(" >> Nome: ");
 			nomePet = sc.nextLine();
-			System.out.println("Peso: ");
+			System.out.print(" >> Peso: ");
 			pesoPet = sc.nextLine();
 			pets = buscarPet(nomePet, pesoPet, Criterio.NOME_PESO, diretorioCadastrados, tipoPetBusca);
 			
 			break;
 		case 10:
-			System.out.println("Raca: ");
+			System.out.print("\n >> Raca: ");
 			racaPet = sc.nextLine();
-			System.out.println("Peso: ");
+			System.out.print(" >> Peso: ");
 			pesoPet = sc.nextLine();
 			pets = buscarPet(racaPet, pesoPet, Criterio.RACA_PESO, diretorioCadastrados, tipoPetBusca);
 			
 			break;
 		case 11:	
 			do {
-				System.out.println("Sexo: ");
+				System.out.print("\n >> Sexo: ");
 				sexoPet = sc.nextLine();				
 			} while(!sexoPet.toUpperCase().equalsIgnoreCase("MACHO") && !sexoPet.toUpperCase().equalsIgnoreCase("FEMEA"));
 			
-			System.out.println("Raca: ");
+			System.out.print(" >> Raca: ");
 			racaPet = sc.nextLine();
 			pets = buscarPet(sexoPet, racaPet, Criterio.SEXO_RACA, diretorioCadastrados, tipoPetBusca);
 			
@@ -431,15 +474,32 @@ public class Main {
 		return pets;
 	}
 	
+	
+	
 	public static List<Pet> buscarPet(String informacao, Criterio criterio, String diretorio, String tipoPet) {
 		ConsultaService consulta = new ConsultaService(diretorio, new BuscarUmCriterio(informacao, criterio));
 		List<Pet> petsEncontrados = consulta.consultar(tipoPet);
 		return petsEncontrados;
 	}
 	
+	
+	
 	public static List<Pet> buscarPet(String informacao1, String informacao2, Criterio criterio, String diretorio, String tipoPet) {
 		ConsultaService consulta = new ConsultaService(diretorio, new BuscarDoisCriterios(informacao1, informacao2, criterio));
 		List<Pet> petsEncontrados = consulta.consultar(tipoPet);
 		return petsEncontrados;
 	}
+	
+	public static void linhasFormatacao() {
+		char traco = '-';
+		int repeticao = 100;
+		System.out.println();
+		
+		for(int i = 0; i < repeticao; i++) {
+			System.out.print(traco);
+		}
+		
+		System.out.println();
+	}
+
 }

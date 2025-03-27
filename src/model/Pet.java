@@ -20,6 +20,8 @@ public class Pet {
 	private String raca;
 	private LocalDateTime dataHora;
 	final static String respostaVazia = "Nao Informado";
+	final static String italico = "\u001B[3m";
+	final static String fechaItalico = "\u001B[0m";
 	
 	public Pet(String nome) {
 		if(nome == null) System.out.println(); //lançar exceção
@@ -93,7 +95,7 @@ public class Pet {
 		this.raca = raca;
 	}
 	
-	public boolean cadastrar(String path) {
+	public void cadastrar(String path) {
 		dataHora = LocalDateTime.now();
 		StringBuilder nomeArquivo = new StringBuilder();
 		
@@ -137,17 +139,18 @@ public class Pet {
 			else bw.write(String.format("6 - %.1fkg\n", peso));
 			if(raca == null) bw.write(String.format("7 - %s\n", respostaVazia));
 			else bw.write(String.format("7 - %s\n", raca));
-			return true;
+			System.out.println(italico + "\nPet cadastrado com sucesso.\n" + fechaItalico);
+			
 		}
 		catch(IOException e) {
-			System.out.println("Erro na geração do cadastro.");
+			System.out.println(italico + "\nErro ao gerar cadastro.\n" + fechaItalico);
 		}
-	
-		return false;
 	}
 	
-	public boolean alterarCadastro(String caminhoArquivo) throws IOException{
-		if(caminhoArquivo.isEmpty()) throw new IOException("Não foi possivel encontrar o pet");
+	public void alterarCadastro(String caminhoArquivo) throws IOException{
+		
+		if(caminhoArquivo.isEmpty()) throw new IOException(italico + "\nNão foi possivel encontrar o pet.\n" + fechaItalico);
+		
 		try(BufferedWriter bw = new BufferedWriter(new FileWriter(caminhoArquivo))){
 			bw.write(String.format("1 - %s\n", this.nome));
 			bw.write(String.format("2 - %s\n", this.tipo));
@@ -159,32 +162,25 @@ public class Pet {
 			bw.write(String.format("5 - %.1f anos\n", this.idade));
 			bw.write(String.format("6 - %.1fkg\n", this.peso));
 			bw.write(String.format("7 - %s\n", this.raca));
-			System.out.println("Cadastro alterado com sucesso");
+			System.out.println(italico + "\nCadastro alterado com sucesso\n" + fechaItalico);
 			
-			return true;
 		}
 		catch(IOException e) {
-			System.out.println("Erro na alteracao do cadastro.");
+			System.out.println(italico + "\nErro ao alterar cadastro.\n" + fechaItalico);
 		}
 		
-		return false;
 	}
 	
-	public boolean deletarCadastro(String caminhoArquivo) {
+	public void deletarCadastro(String caminhoArquivo) {
 		File arquivo = new File(caminhoArquivo);
 		try {
 			arquivo.delete();
+			System.out.println(italico + "\nCadastro deletado com sucesso.\n" + fechaItalico);
 		}
 		catch(Exception e) {
-			System.out.println("Erro ao deletar o Pet");
-			return false;
+			System.out.println(italico + "\nErro ao deletar o Cadastro\n" + fechaItalico);
 		}
-		
-		System.out.println("Pet deletado com sucesso.");
-		return true;
 	}
-
-	
 
 	@Override
 	public int hashCode() {
@@ -217,13 +213,18 @@ public class Pet {
 		sb.append(getEndereco().getRua());
 		sb.append(", ");
 		sb.append(getEndereco().getNumero() == null? respostaVazia : getEndereco().getNumero());
-		sb.append(", ");
+		sb.append(" - ");
 		sb.append(getEndereco().getCidade());
 		sb.append(" - ");
-		sb.append(getIdade() == null? respostaVazia : idade);
+		
+		if(getIdade() == null) sb.append(respostaVazia);
+		else sb.append(String.format("%.1f anos", idade));
 		sb.append(" - ");
-		sb.append(getPeso() == null? respostaVazia : peso );
+		
+		if(getPeso() == null) sb.append(respostaVazia);
+		else sb.append(String.format("%.1fkg", peso));
 		sb.append(" - ");
+
 		sb.append(getRaca() == null? respostaVazia : raca);
 		
 		return sb.toString();

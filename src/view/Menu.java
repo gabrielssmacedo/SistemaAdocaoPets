@@ -10,9 +10,11 @@ import java.util.List;
 public final class Menu {
 	private final static String abreNegrito = "\033[1m";
 	private final static String fechaNegrito = "\033[0m";
+	private final static String italico = "\u001B[3m";
+	private final static String fechaItalico = "\u001B[0m";
 	
 	public static void menuCadastro() {
-		System.out.println("Deseja:");
+		System.out.println("\nDeseja:");
 		System.out.println(" [1] Cadastrar um novo pet");
 		System.out.println(" [2] Alterar os dados do pet cadastrado");
 		System.out.println(" [3] Deletar um pet cadastrado");
@@ -22,7 +24,7 @@ public final class Menu {
 	}
 
 	public static void menuBuscaPets() {
-		System.out.println("Buscar por:");
+		System.out.println("\nBuscar por:");
 		System.out.println("[1] Nome");
 		System.out.println("[2] Sexo");
 		System.out.println("[3] Idade");
@@ -48,7 +50,7 @@ public final class Menu {
 			}
 		}
 		catch(IOException e) {
-			System.out.println("Erro na leitura do Formulario.");
+			System.out.println(italico + "Erro na leitura do Formulario.\n" + fechaItalico);
 			return null;
 		}
 		
@@ -58,18 +60,18 @@ public final class Menu {
 	public static boolean validaRespostas(String resposta, Integer indice) throws RuntimeException {
 			switch (indice) {
 			case 0:
-				if(resposta.isEmpty()) throw new RuntimeException("Valor invalido: nome não pode estar vazio");
-				else if(temCaracteresEspeciais(resposta)) throw new RuntimeException("Valor invalido: o nome deve conter SOMENTE letras.");
+				if(resposta.isEmpty()) throw new RuntimeException(italico + "Valor invalido: nome não pode estar vazio\n" + fechaItalico);
+				else if(temCaracteresEspeciais(resposta)) throw new RuntimeException(italico + "Valor invalido: o nome deve conter SOMENTE letras.\n" + fechaItalico);
 	
 				break;	
 			case 4:
 				Double idade = Double.parseDouble(resposta);
-				if(idade > 20) throw new RuntimeException("Valor invalido: idade deve ser ate 20 anos.");	
+				if(idade > 20) throw new RuntimeException(italico + "Valor invalido: idade deve ser ate 20 anos.\n" + fechaItalico);	
 					
 				break;
 			case 5:
 				double peso = Double.parseDouble(resposta);
-				if(peso > 60 || peso < 0.50) throw new RuntimeException("Valor invalido: peso deve estar entre 0.5Kg e 60Kg");	
+				if(peso > 60 || peso < 0.50) throw new RuntimeException(italico + "Valor invalido: peso deve estar entre 0.5Kg e 60Kg\n" + fechaItalico);	
 				
 				break;	
 			case 6:
@@ -85,8 +87,8 @@ public final class Menu {
 	public static void inicio() {
 		String barra = "=";
 		String espaco = " ";
-		int numBarras = 132;
-		int numEspacos = 53;
+		int numBarras = 100;
+		int numEspacos = 37;
 		for(int i = 0; i < numBarras; i++) System.out.print(barra);
 		System.out.print(abreNegrito + "\n|" + fechaNegrito);
 		for(int i = 0; i < numEspacos; i++) System.out.print(espaco);
@@ -95,7 +97,7 @@ public final class Menu {
 		System.out.print(abreNegrito + "|\n" + fechaNegrito);
 		for(int i = 0; i < numBarras; i++) System.out.print(abreNegrito + barra + fechaNegrito);
 		System.out.println("\n");
-		System.out.println(abreNegrito + "Bem vindo ao Sistema de cadastro para a Adoção de Pets!\n" + fechaNegrito);
+		System.out.println(abreNegrito + "Bem vindo ao Sistema de cadastro para a Adoção de Pets!" + fechaNegrito);
 	}
 	
 	private static boolean temCaracteresEspeciais(String s) {

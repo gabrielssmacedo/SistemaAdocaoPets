@@ -1,7 +1,7 @@
-1 - Gazma
+1 - Gaz
 2 - CACHORRO
 3 - FEMEA
-4 - Rua Paulistana, 903, Sao Paulo
-5 - 20,0 anos
-6 - 43,0kg
-7 - XouXou
+4 - Bauneario de Camboriu, 12, Santa Catarina
+5 - 5,0 anos
+6 - 23,0kg
+7 - Chiuaua

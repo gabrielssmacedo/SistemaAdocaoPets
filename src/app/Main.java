@@ -175,10 +175,10 @@ public class Main {
 				
 				break;
 			case 2:
-				String tipoPetBusca;
-				String novoNome, novaCidade, novaRua, novaRaca;
-				Double novaIdade, novoPeso;
-				Integer novoNumero;
+				String tipoPetBusca = null;
+				String novoNome = null, novaCidade = null, novaRua = null, novaRaca = null, novaIdade = null, novoPeso = null;
+				
+				Integer novoNumero = null;
 				
 				linhasFormatacao();
 				
@@ -215,49 +215,61 @@ public class Main {
 					linhasFormatacao();
 					sc.nextLine();
 					System.out.println("\nInsira as novas informacoes: ");
-					
-					System.out.print(italico + "\nNome: " + fechaItalico);
-					novoNome = sc.nextLine();
-					
-					System.out.print(italico + "Cidade: " + fechaItalico);
-					novaCidade = sc.nextLine();
-					
-					System.out.print(italico + "Rua: " + fechaItalico);
-					novaRua = sc.nextLine();
-					
-					System.out.print(italico + "Numero: " + fechaItalico);
-					novoNumero = sc.nextInt();
-					
-					System.out.print(italico + "Idade: " + fechaItalico);
-					novaIdade = sc.nextDouble();
-					
-					System.out.print(italico + "Peso: " + fechaItalico);
-					novoPeso = sc.nextDouble();
-					
-					System.out.print(italico + "Raca: " + fechaItalico);
-					sc.nextLine();
-					novaRaca = sc.nextLine();
-					
-					Map<Pet, File> petsMap = buscarTodosPets.listarTodosPets();
-					Set<Pet> petsSet = petsMap.keySet();
-					File arqPet = null;
-					
-					for(Pet petCadastrado : petsSet) {
-						if(petCadastrado.equals(petsEncontrados.get(respostaEscolhaCadastro-1)))
-							arqPet = petsMap.get(petCadastrado);
-					}
-					
-					Pet novoPet = new Pet(novoNome 
-							, petsEncontrados.get(respostaEscolhaCadastro-1).getTipo()
-							, petsEncontrados.get(respostaEscolhaCadastro-1).getSexo() 
-							, new Endereco(novoNumero, novaCidade, novaRua)
-							, novaIdade
-							, novoPeso
-							, novaRaca);
-					
 					try {
+						
+						System.out.print(italico + "\nNome: " + fechaItalico);
+						novoNome = sc.nextLine();
+						Menu.validaRespostas(novoNome, 0);
+						
+						System.out.print(italico + "Cidade: " + fechaItalico);
+						novaCidade = sc.nextLine();
+						
+						
+						System.out.print(italico + "Rua: " + fechaItalico);
+						novaRua = sc.nextLine();
+						
+						System.out.print(italico + "Numero: " + fechaItalico);
+						novoNumero = sc.nextInt();
+						
+						System.out.print(italico + "Idade: " + fechaItalico);
+						novaIdade = sc.next();
+						Menu.validaRespostas(novaIdade, 4);
+						
+						sc.nextLine();
+						System.out.print(italico + "Peso: " + fechaItalico);
+						novoPeso = sc.next();
+						Menu.validaRespostas(novoPeso, 5);
+						
+						System.out.print(italico + "Raca: " + fechaItalico);
+						sc.nextLine();
+						novaRaca = sc.nextLine();
+						Menu.validaRespostas(novaRaca, 6);
+						
+						Map<Pet, File> petsMap = buscarTodosPets.listarTodosPets();
+						Set<Pet> petsSet = petsMap.keySet();
+						File arqPet = null;
+						
+						for(Pet petCadastrado : petsSet) {
+							if(petCadastrado.equals(petsEncontrados.get(respostaEscolhaCadastro-1)))
+								arqPet = petsMap.get(petCadastrado);
+						}
+						
+						novaIdade = novaIdade.replace(',', '.');
+						novoPeso = novoPeso.replace(',', '.');
+						
+						Pet novoPet = new Pet(novoNome 
+								, petsEncontrados.get(respostaEscolhaCadastro-1).getTipo()
+								, petsEncontrados.get(respostaEscolhaCadastro-1).getSexo() 
+								, new Endereco(novoNumero, novaCidade, novaRua)
+								, Double.parseDouble(novaIdade)
+								, Double.parseDouble(novoPeso)
+								, novaRaca);
 						novoPet.alterarCadastro(String.valueOf(arqPet));
-					} catch (IOException e) {
+					}
+					catch(RuntimeException e) {
+						System.out.println(e.getMessage());
+					}
+					catch(IOException e) {
 						System.out.println(e.getMessage());
 					}
 					

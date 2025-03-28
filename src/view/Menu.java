@@ -60,25 +60,25 @@ public final class Menu {
 	public static boolean validaRespostas(String resposta, Integer indice) throws RuntimeException {
 			switch (indice) {
 			case 0:
-				if(resposta.isEmpty()) throw new RuntimeException(italico + "Valor invalido: nome não pode estar vazio\n" + fechaItalico);
-				else if(temCaracteresEspeciais(resposta)) throw new RuntimeException(italico + "Valor invalido: o nome deve conter SOMENTE letras.\n" + fechaItalico);
+				if(resposta.isEmpty()) throw new RuntimeException(italico + "\nValor invalido: nome não pode estar vazio\n" + fechaItalico);
+				else if(temCaracteresEspeciais(resposta)) throw new RuntimeException(italico + "\nValor invalido: o nome deve conter SOMENTE letras.\n" + fechaItalico);
 	
 				break;	
 			case 4:
 				Double idade = Double.parseDouble(resposta);
-				if(idade > 20) throw new RuntimeException(italico + "Valor invalido: idade deve ser ate 20 anos.\n" + fechaItalico);	
+				if(idade > 20) throw new RuntimeException(italico + "\nValor invalido: idade deve ser ate 20 anos.\n" + fechaItalico);	
 					
 				break;
 			case 5:
 				double peso = Double.parseDouble(resposta);
-				if(peso > 60 || peso < 0.50) throw new RuntimeException(italico + "Valor invalido: peso deve estar entre 0.5Kg e 60Kg\n" + fechaItalico);	
+				if(peso > 60 || peso < 0.50) throw new RuntimeException(italico + "\nValor invalido: peso deve estar entre 0.5Kg e 60Kg\n" + fechaItalico);	
 				
 				break;	
 			case 6:
 				String raca = resposta;
-				if(temCaracteresEspeciais(raca)) return false;
+				if(temCaracteresEspeciais(raca)) throw new RuntimeException(italico + "\nValor invalido: digite apenas letras\n" + fechaItalico);	
 				
-				break;				
+				return false;				
 			}
 	
 		return true;

@@ -399,7 +399,7 @@ public class Main {
 		List<Pet> pets = null;
 		switch(tipoBusca) {
 		case 1:
-			System.out.print("\n>> Nome: ");
+			System.out.print("\n>> Buscar pelo Nome: ");
 			String nomePet = sc.nextLine();
 			pets = buscarPet(nomePet, Criterio.NOME, diretorioCadastrados, tipoPetBusca);
 			
@@ -407,7 +407,7 @@ public class Main {
 		case 2:
 			String sexoPet;
 			do {
-				System.out.print("\n>> Sexo: ");
+				System.out.print("\n>> Buscar pelo Sexo: ");
 				sexoPet = sc.nextLine();				
 			} while(!sexoPet.toUpperCase().equalsIgnoreCase("MACHO") && !sexoPet.toUpperCase().equalsIgnoreCase("FEMEA"));
 			
@@ -415,68 +415,68 @@ public class Main {
 			
 			break;
 		case 3:
-			System.out.print("\n >> Idade: ");
+			System.out.print("\n >> Busca pela Idade: ");
 			String idadePet = sc.nextLine();
 			pets = buscarPet(idadePet, Criterio.IDADE, diretorioCadastrados, tipoPetBusca);
 			
 			break;
 		case 4:
-			System.out.print("\n >> Peso: ");
+			System.out.print("\n >> Buscar pelo Peso: ");
 			String pesoPet = sc.nextLine();
 			pets = buscarPet(pesoPet, Criterio.PESO, diretorioCadastrados, tipoPetBusca);
 			
 			break;
 		case 5:
-			System.out.print("\n >> Raca: ");
+			System.out.print("\n >> Buscar pela Raca: ");
 			String racaPet = sc.nextLine();
 			pets = buscarPet(racaPet, Criterio.RACA, diretorioCadastrados, tipoPetBusca);
 
 			break;
 		case 6:
-			System.out.print("\n >> Endereco: ");
+			System.out.print("\n >> Buscar pelo Endereco: ");
 			String enderecoPet = sc.nextLine();
 			pets = buscarPet(enderecoPet, Criterio.ENDERECO, diretorioCadastrados, tipoPetBusca);
 			
 			break;
 		case 7:
-			System.out.print("\n >> Nome: ");
+			System.out.print("\n >> Digite o Nome: ");
 			nomePet = sc.nextLine();
-			System.out.print(" >> Idade: ");
+			System.out.print(" >> Digite a Idade: ");
 			idadePet = sc.nextLine();
 			pets = buscarPet(nomePet, idadePet, Criterio.NOME_IDADE, diretorioCadastrados,tipoPetBusca);
 			
 			break;
 		case 8:
-			System.out.print("\n >> Idade: ");
+			System.out.print("\n >> Digite a Idade: ");
 			idadePet = sc.nextLine();
-			System.out.print(" >> Peso: ");
+			System.out.print(" >> Digite o Peso: ");
 			pesoPet = sc.nextLine();
 			pets = buscarPet(idadePet, pesoPet, Criterio.IDADE_PESO, diretorioCadastrados, tipoPetBusca);
 			
 			break;
 		case 9:
-			System.out.print(" >> Nome: ");
+			System.out.print(" >> Digite o Nome: ");
 			nomePet = sc.nextLine();
-			System.out.print(" >> Peso: ");
+			System.out.print(" >> Digite o Peso: ");
 			pesoPet = sc.nextLine();
 			pets = buscarPet(nomePet, pesoPet, Criterio.NOME_PESO, diretorioCadastrados, tipoPetBusca);
 			
 			break;
 		case 10:
-			System.out.print("\n >> Raca: ");
+			System.out.print("\n >> Digite a Raca: ");
 			racaPet = sc.nextLine();
-			System.out.print(" >> Peso: ");
+			System.out.print(" >> Digite o Peso: ");
 			pesoPet = sc.nextLine();
 			pets = buscarPet(racaPet, pesoPet, Criterio.RACA_PESO, diretorioCadastrados, tipoPetBusca);
 			
 			break;
 		case 11:	
 			do {
-				System.out.print("\n >> Sexo: ");
+				System.out.print("\n >> Digite o Sexo: ");
 				sexoPet = sc.nextLine();				
 			} while(!sexoPet.toUpperCase().equalsIgnoreCase("MACHO") && !sexoPet.toUpperCase().equalsIgnoreCase("FEMEA"));
 			
-			System.out.print(" >> Raca: ");
+			System.out.print(" >> Digite a Raca: ");
 			racaPet = sc.nextLine();
 			pets = buscarPet(sexoPet, racaPet, Criterio.SEXO_RACA, diretorioCadastrados, tipoPetBusca);
 			

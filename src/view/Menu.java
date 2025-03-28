@@ -76,9 +76,7 @@ public final class Menu {
 				break;	
 			case 6:
 				String raca = resposta;
-				if(temCaracteresEspeciais(raca)) throw new RuntimeException(italico + "\nValor invalido: digite apenas letras\n" + fechaItalico);	
-				
-				return false;				
+				if(temCaracteresEspeciais(raca)) throw new RuntimeException(italico + "\nValor invalido: digite apenas letras\n" + fechaItalico);					
 			}
 	
 		return true;

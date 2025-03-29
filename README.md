@@ -1,6 +1,5 @@
 ![Imagem do Sistema](img/img-sistema.png)
 
-# Sistema para Adoção de Pets
 É um sistema de cadastro para Adoção de Pets via CLI (interface de linha de comando), desenvolvido inteiramente com Java, que permite o cadastro, alteração, busca e exclusão de pets.
 
 ## Motivação
@@ -32,7 +31,7 @@ git clone [URL] SistemaAdocaoPets
 ### Atenção
 Antes de executar, é preciso mudar os valores das constantes 'caminhoFormulario' e 'caminhoDirCadastro', atribuindo o caminho das pastas que estão no seu computador.
 
-caminhoFormulario -> caminho da pasta que está o formulário
+caminhoFormulario -> caminho da pasta que está o arquivo do formulário\
 caminhoDirCadastro -> caminho da pasta onde ficam os arquivos txt's dos pets cadastrados
 
 As constantes se encontram em src/app/Main.java no inicio do método main.

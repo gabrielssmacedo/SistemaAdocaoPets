@@ -183,7 +183,7 @@ public class Main {
 				linhasFormatacao();
 				
 				do {
-					System.out.print("\nTipo do Pet: ");
+					System.out.print("\nTipo do Animal: ");
 					tipoPetBusca = sc.next();
 				} while(!tipoPetBusca.toUpperCase().equalsIgnoreCase("CACHORRO") && !tipoPetBusca.toUpperCase().equalsIgnoreCase("GATO"));
 				
@@ -286,7 +286,7 @@ public class Main {
 				linhasFormatacao();
 				
 				do {
-					System.out.print("\nTipo do Pet: ");
+					System.out.print("\nTipo do Animal: ");
 					tipoPetBusca = sc.next();
 				} while(!tipoPetBusca.toUpperCase().equalsIgnoreCase("CACHORRO") && !tipoPetBusca.toUpperCase().equalsIgnoreCase("GATO"));
 				
@@ -357,7 +357,7 @@ public class Main {
 				
 				System.out.println();
 				do {
-					System.out.print("Tipo do Pet: ");
+					System.out.print("Tipo do Animal: ");
 					tipoPetBusca = sc.next();
 				} while(!tipoPetBusca.toUpperCase().equalsIgnoreCase("CACHORRO") && !tipoPetBusca.toUpperCase().equalsIgnoreCase("GATO"));
 				

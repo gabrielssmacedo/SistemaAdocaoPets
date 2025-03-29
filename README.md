@@ -29,12 +29,12 @@ git clone [URL] SistemaAdocaoPets
 4. Abra a pasta do sistema em sua IDE
 
 ### Atenção
-Antes de executar, é preciso mudar os valores das constantes 'caminhoFormulario' e 'caminhoDirCadastro', atribuindo o caminho das pastas que estão no seu computador.
+Antes de executar, é preciso mudar os valores das constantes ```java caminhoFormulario``` e ```java caminhoDirCadastro```, atribuindo o caminho das pastas que estão no seu computador.
 
-caminhoFormulario -> caminho da pasta que está o arquivo do formulário\
-caminhoDirCadastro -> caminho da pasta onde ficam os arquivos txt's dos pets cadastrados
+```java caminhoFormulario``` -> caminho da pasta que está o arquivo do formulário\
+```java caminhoDirCadastro``` -> caminho da pasta onde ficam os arquivos txt's dos pets cadastrados
 
-As constantes se encontram em src/app/Main.java no inicio do método main.
+As constantes se encontram em ```bash src/app/Main.java``` no inicio do método main.
 
 ### Importante
 1. Não altere qualquer pergunta do arquivo formulário, nem mesmo acrescente linhas vazias logo abaixo
@@ -50,22 +50,22 @@ Ao excecutar o sistema, um menu inicial exibirá as seguintes opções:
  [5] Listar pets por algum critério (idade, nome, raça)
  [6] Sair
 ```
-### Cadastrar pet
+### 1. Cadastrar pet
 As perguntas de um formulário são lidas e o usuário deve inserir as respostas referentes ao pet. No final, um arquivo txt com as informações coletadas será criado dentro da pasta petsCadastrados. Todas as respostas possuem validação, portanto, é preciso atentar-se.
 
-### Alterar cadastro
+### 2. Alterar cadastro
 Permite a alteração das informações de um pet que foram cadastradas. Para isso, é realizada uma busca com base em determinados critérios escolhidos pelo usuário. O mesmo escolhe um dentre os encontrados e insere novas informações que substituirão as atuais.
 
-### Deletar pet
+### 3. Deletar pet
 Excluí um pet cadastrado. Um busca é realizada da mesma forma que no cadastro, então o usuário escolhe o pet que será excluido dentre os encontrados. Ao deletar um pet, o arquivo txt referente a ele também será excluido.
 
-### Lista todos os pets
+### 4. Lista todos os pets
 Exibe todos os pets cadastrados, ou seja, que possuem um arquivo txt, independentemente de critérios do usuário.
 
-### Listar por critérios
+### 5. Listar por critérios
 Busca pets com base em alguns critérios ( um ou dois combinados). O resultado é exibido para o usuário.
 
-### Sair
+### 6. Sair
 Encerra o programa.
 
 ## Contribuição

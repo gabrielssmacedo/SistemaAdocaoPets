@@ -1,7 +1,0 @@
-1 - Florzinha
-2 - CACHORRO
-3 - FEMEA
-4 - Rua das Nacoes, 123, Sao Paulo
-5 - 20,0 anos
-6 - 24,5kg
-7 - Vira Caixa

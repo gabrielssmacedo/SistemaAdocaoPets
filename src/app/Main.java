@@ -20,14 +20,21 @@ import view.Menu;
 public class Main {
 
 	public static void main(String[] args) {
+		
+		//----------------------------------------------------------------------------------------------------------//
+		
+		final String caminhoFormulario = "";  // <----- INSIRA o caminho do arquivo do FORMULARIO
+		
+		final String caminhoDirCadastro = ""; // <----- INSIRA o caminho do DIRETORIO onde ficam os pets cadastrados
+		
+		//----------------------------------------------------------------------------------------------------------//
+		
 		final String negrito = "\033[1m";
 	    final String fechaNegrito = "\033[0m";
 		final String italico = "\u001B[3m";
 		final String fechaItalico = "\u001B[0m";
 		
 		Scanner sc = new Scanner(System.in);
-		final String caminhoFormulario = "C:\\Users\\gabri\\OneDrive\\Área de Trabalho\\SistemaAdocaoPets\\formulario\\formulario.txt";
-		final String caminhoDirCadastro = "C:\\Users\\gabri\\OneDrive\\Área de Trabalho\\SistemaAdocaoPets\\petsCadastrados";
 		Integer respostaMenuCadastro; 
 		ConsultaService buscarTodosPets = new ConsultaService(caminhoDirCadastro);
 		

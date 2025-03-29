@@ -23,9 +23,9 @@ public class Main {
 		
 		//----------------------------------------------------------------------------------------------------------//
 		
-		final String caminhoFormulario = "";  // <----- INSIRA o caminho do arquivo do FORMULARIO
+		final String caminhoFormulario = "INSIRA-AQUI";  // <----- INSIRA O CAMINHO DO ARQUIVO FORMULARIO
 		
-		final String caminhoDirCadastro = ""; // <----- INSIRA o caminho do DIRETORIO onde ficam os pets cadastrados
+		final String caminhoDirCadastro = "INSIRA-AQUI"; // <----- INSIRA O CAMINHO DO DIRETORIO ONDE FICAM OS PETS CADASTRADOS
 		
 		//----------------------------------------------------------------------------------------------------------//
 		

@@ -23,9 +23,9 @@ public class Main {
 		
 		//----------------------------------------------------------------------------------------------------------//
 		
-		final String caminhoFormulario = "C:\\Users\\gabri\\OneDrive\\Área de Trabalho\\SistemaAdocaoPets\\formulario\\formulario.txt";  // <----- INSIRA O CAMINHO DO ARQUIVO FORMULARIO
+		final String caminhoFormulario = "INSIRA-AQUI";  // <----- INSIRA O CAMINHO DO ARQUIVO FORMULARIO
 		
-		final String caminhoDirCadastro = "C:\\Users\\gabri\\OneDrive\\Área de Trabalho\\SistemaAdocaoPets\\petsCadastrados"; // <----- INSIRA O CAMINHO DO DIRETORIO ONDE FICAM OS PETS CADASTRADOS
+		final String caminhoDirCadastro = "INSIRA-AQUI"; // <----- INSIRA O CAMINHO DO DIRETORIO ONDE FICAM OS PETS CADASTRADOS
 		
 		//----------------------------------------------------------------------------------------------------------//
 		

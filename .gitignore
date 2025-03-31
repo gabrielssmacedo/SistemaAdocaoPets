@@ -2,3 +2,5 @@
 .code
 .vscode
 bin/
+.classpath
+.project

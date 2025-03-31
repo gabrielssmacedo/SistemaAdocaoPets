@@ -1,13 +1,13 @@
-package controller;
+package utils;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-import controller.interfaces.Busca;
 import model.Pet;
 import model.enums.Criterio;
 import model.enums.SexoPet;
 import model.enums.TipoPet;
+import utils.interfaces.Busca;
 
 public class BuscarUmCriterio implements Busca{
 	

@@ -1,4 +1,4 @@
-package controller.interfaces;
+package utils.interfaces;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package controller;
+package utils;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -10,11 +10,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import controller.interfaces.Busca;
 import model.Endereco;
 import model.Pet;
 import model.enums.SexoPet;
 import model.enums.TipoPet;
+import utils.interfaces.Busca;
 
 public class ConsultaService {
 	private String diretorio;

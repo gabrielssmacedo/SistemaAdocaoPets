@@ -1,4 +1,4 @@
-package view;
+package menu;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

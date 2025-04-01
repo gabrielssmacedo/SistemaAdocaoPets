@@ -41,6 +41,9 @@ As constantes se encontram em ```bash src/app/Main.java``` no inicio do método 
 2. Tome os mesmos cuidados com os arquivos dos pets cadastrados
 
 ## Utilização
+
+https://github.com/user-attachments/assets/e1b39dd1-131e-4bdc-8ce5-5cda5aed40e9
+
 Ao excecutar o sistema, um menu inicial exibirá as seguintes opções:
 ```bash
  [1] Cadastrar um novo pet
